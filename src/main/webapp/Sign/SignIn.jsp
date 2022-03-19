@@ -123,6 +123,10 @@
             <input type="text" class="form-control" value="" name="username" onblur="checkUserName()" placeholder="UserName" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
+            <span class="input-group-addon" id="name" >用户名</span>
+            <input type="text" class="form-control" value="" name="name" onblur="checkUserName()" placeholder="UserName" aria-describedby="sizing-addon1">
+        </div><br>
+        <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password" >密码</span>
             <input type="password" class="form-control" value="" name="password" placeholder="password" aria-describedby="sizing-addon1">
         </div><br>

@@ -7,7 +7,7 @@ import com.zmy.pojo.Account;
  * @Description
  * @create 2022-03-18 17:11
  */
-public interface accountDao {
+public interface AccountDao {
 
     /**
      * 注册
@@ -16,6 +16,7 @@ public interface accountDao {
      * @param account 账户对象
      */
     void Login(Account account);
+
 
     /**
      *  通过用户名获取用户信息

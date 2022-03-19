@@ -1,7 +1,9 @@
 package com.zmy.dao.Impl;
 
 import com.zmy.Utils.DBUtil;
-import com.zmy.dao.accountDao;
+import com.zmy.dao.AuthDao;
+import com.zmy.dao.ColunmnDao;
+import com.zmy.dao.AccountDao;
 import com.zmy.pojo.Account;
 
 import java.sql.Connection;
@@ -14,7 +16,8 @@ import java.sql.SQLException;
  * @Description
  * @create 2022-03-18 22:12
  */
-public class accountDaoImpl implements accountDao {
+public class accountDaoImpl implements AccountDao {
+    private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
     /**
      * 注册
@@ -29,13 +32,17 @@ public class accountDaoImpl implements accountDao {
         try {
             con = DBUtil.getCon();
             // 将该账户插入 Account表中
-            String sql = "insert into Account (userName,tel,password,role)values (?,?,?,?)";
+            String sql = "insert into Account (userName,name ,tel,password,role)values (?,?,?,?,?)";
             ps = con.prepareStatement(sql);
             ps.setObject(1,account.getUserName());
-            ps.setObject(2,account.getTel());
-            ps.setObject(3,account.getPassword());
-            ps.setObject(4,2);
+            ps.setObject(2,account.getName());
+            ps.setObject(3,account.getTel());
+            ps.setObject(4,account.getPassword());
+            ps.setObject(5,2);
             ps.executeUpdate();
+            // 给用户受初始权限
+            AuthDao authDao = new AuthDaoImpl();
+            authDao.authtoAccount(account);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

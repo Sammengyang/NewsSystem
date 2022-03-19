@@ -32,4 +32,12 @@ public class Colunmn {
     public void setColName(String colName) {
         ColName = colName;
     }
+
+    @Override
+    public String toString() {
+        return "Colunmn{" +
+                "colid=" + colid +
+                ", ColName='" + ColName + '\'' +
+                '}';
+    }
 }

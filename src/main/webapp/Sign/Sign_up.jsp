@@ -69,13 +69,13 @@
                 <div class="login_h">后台登陆</div>
                 <form action="/SignUpServlet" method="post">
                     <div class="user_login">
-                        <input type="text" name="username" value="sys" placeholder="账号">
-                        <input type="text" name="password" value="1" placeholder="密码">
+                        <input type="text" name="username"  placeholder="账号">
+                        <input type="password" name="password" value="1" placeholder="密码">
                     </div>
                     <button class="login_btn" type="submit" >登陆</button>
                 </form><br>
                 <div>
-                    <a class="btn-lg" href="SignIn.jsp">免费注册</a>
+                    <a class="btn-lg" href="/Sign/SignIn.jsp">免费注册</a>
                     <a class="btn-lg" data-toggle="modal" data-target="#myModal">
                         忘记密码
                     </a>

@@ -27,10 +27,11 @@ public class Account {
         this.role = role;
     }
 
-    public Account(String username, String tel, String password) {
+    public Account(String username, String tel, String password,String name) {
         this.userName = username;
         this.tel = tel;
         this.password = password;
+        this.Name = name;
     }
 
     public Account(String userName, String name, String password, String tel, String role) {
@@ -39,6 +40,27 @@ public class Account {
         this.password = password;
         this.tel = tel;
         this.role = role;
+    }
+
+    public Account(String username, String password) {
+        this.userName = username;
+        this.password = password;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public List<Colunmn> getColunmns() {
+        return colunmns;
+    }
+
+    public void setColunmns(List<Colunmn> colunmns) {
+        this.colunmns = colunmns;
     }
 
     public String getUserName() {

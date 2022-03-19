@@ -1,7 +1,7 @@
 package com.zmy.service.Impl;
 
 import com.zmy.dao.Impl.accountDaoImpl;
-import com.zmy.dao.accountDao;
+import com.zmy.dao.AccountDao;
 import com.zmy.pojo.Account;
 import com.zmy.service.SignService;
 
@@ -11,7 +11,7 @@ import com.zmy.service.SignService;
  * @create 2022-03-18 21:04
  */
 public class SignServiceImpl implements SignService {
-    private final accountDao accountDao = new accountDaoImpl();
+    private final AccountDao accountDao = new accountDaoImpl();
 
     /**
      * 注册

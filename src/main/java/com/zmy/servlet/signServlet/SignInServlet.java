@@ -44,13 +44,14 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 验证码发送成功才会转发到 SignInServlet
         String username = request.getParameter("username");
+        String name = request.getParameter("name");
         String password = request.getParameter("password");
         String tel = request.getParameter("tel");
         String code = request.getParameter("code");
         String code1 = (String) request.getSession().getAttribute("code");
         if (code1.equals(code)){
             if(username.length()!=0&&password.length()!=0&&tel.length()!=0){
-                Account account = new Account(username,tel,password);
+                Account account = new Account(username,tel,password,name);
                 signService.login(account);
                 response.sendRedirect("/Sign/Sign_up.jsp");
             }

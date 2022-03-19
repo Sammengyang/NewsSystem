@@ -21,7 +21,6 @@
 
 </div>
 <div class="content ">
-    <c:if test="${sessionScope.account.role==1}">
         <div class="user">
             <div class="user_status fl text_center">当前用户： <span>${sessionScope.account.userName}</span></div>
             <div class="user_location fl">当前： 首页-<span>账户管理</span>  </div>
@@ -38,12 +37,6 @@
                 <iframe src="account/AccountManagement.jsp"></iframe>
             </div>
         </div>
-    </c:if>
-
-
-    <c:if test="">
-
-    </c:if>
 </div>
 </body>
 </html>

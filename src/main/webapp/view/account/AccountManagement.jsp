@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Sam
@@ -21,10 +22,16 @@
     </h3>
     <div class="AM_ct text_center">
         <div class="AM_ct_in">
-            <div class="add_btn df_btn fl" id="add_Account_btn">添加</div>
-            <div class="edit_btn df_btn fl" id="edit_Account_btn">编辑</div>
-            <div class="delete_btn df_btn fl" id="delete_Account_btn">删除</div>
-            <div class="fr df_btn ac_btn" id="ac_Account_btn">账号授权</div>
+            <c:if test="${sessionScope.account.role==1}">
+                <div class="add_btn df_btn fl" id="add_Account_btn">添加</div>
+                <div class="edit_btn df_btn fl" id="edit_Account_btn">编辑</div>
+                <div class="delete_btn df_btn fl" id="delete_Account_btn">删除</div>
+                <div class="fr df_btn ac_btn" id="ac_Account_btn">账号授权</div>
+            </c:if>
+            <c:if test="${sessionScope.account.role!=1}">
+                <div class="delete_btn df_btn fl" id="delete_Account_btn">注销账号</div>
+                <div class="fr df_btn ac_btn" id="ac_Account_btn">修改个人信息</div>
+            </c:if>
         </div>
     </div>
 
@@ -49,46 +56,7 @@
                 <li class="b20"><label>abc123456</label></li>
                 <li class="b60"><label>教务处、新闻中心、财务处</label></li>
             </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-            <ul class="list_b">
-                <li class="b20"><label><input type="checkbox" name=""><span>jiaowuchu</span></label></li>
-                <li class="b20"><label>abc123456</label></li>
-                <li class="b60"><label>教务处、新闻中心、财务处</label></li>
-            </ul>
-
-
-
         </div>
-
         <div class="pull_page">
             <div class="fl pull_page_up">上一页</div>
             <ul>
