@@ -43,17 +43,6 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<%--<%--%>
-<%--    //登录失败后账号框的数据存入cookie--%>
-<%--    String username = "";--%>
-<%--    Cookie[] cookies = request.getCookies();--%>
-<%--    for (int i = 0; i < cookies.length; i++) {--%>
-<%--        if ("username".equals(cookies[i].getName())) {--%>
-<%--            username = cookies[i].getValue();--%>
-<%--        }--%>
-<%--    }--%>
-<%--    System.out.println(username);--%>
-<%--%>--%>
 <div id="register" class="center-block">
     <form action="/SignUpServlet" method="post">
         <div class="input-group input-group-lg">
@@ -76,7 +65,7 @@
         </div>
         <br>
         <div style="float: right">
-            <a href="/view/SignIn/SignIn.jsp">注册</a>
+            <a href="/Sign/SignIn.jsp">注册</a>
         </div>
     </form>
 </div>

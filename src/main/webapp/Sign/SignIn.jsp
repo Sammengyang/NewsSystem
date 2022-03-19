@@ -24,7 +24,7 @@
                 var sid = $("input[name='sid']").val();
                 $.ajax({
                     type:"GET", // 提交数据类型
-                    url:"${pageContext.request.contextPath}/AccountServlet", // 提交到哪个服务器
+                    url:"/AccountServlet", // 提交到哪个服务器
                     data:"username="+sid, // 提交的数据
                     dataType:"text", // 提交的数据类型
                     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
@@ -44,8 +44,8 @@
                 alert(tel);
                 $.ajax({
                     type:"GET", // 提交数据类型
-                    url:"${pageContext.request.contextPath}/SendSmsServlet", // 提交到哪个服务器
-                    data:"username="+tel, // 提交的数据
+                    url:"/SendSmsServlet", // 提交到哪个服务器
+                    data:"tel="+tel, // 提交的数据
                     dataType:"text", // 提交的数据类型
                     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
                         if (d=="success"){
@@ -60,8 +60,25 @@
                 });
             });
         });
-        function goSignUp(){
-            window.location.href="../view/SignUp/Sign_up.jsp";
+        function checkPwd(){
+            var pwd = $("input[name='password']").val();
+            var rpwd = $("input[name='rpassword']").val();
+            if (pwd!=""){
+                if (pwd==rpwd){
+                    $("input[name='password']").css("border","2px green solid");
+                    $("input[name='rpassword']").css("border","2px green solid");
+                    // 按钮生效
+                    $("#signin").attr("disabled",false);
+                }else{
+                    $("input[name='password']").css("border","2px red solid");
+                    $("input[name='rpassword']").css("border","2px red solid");
+                    // 按钮失效
+                    $("#signin").attr("disabled",true);
+                }
+            }
+        }
+        function checkUserName(){
+            var pwd = $("input[name='username']").val();
         }
     </script>
     <style>
@@ -97,7 +114,7 @@
     <form action="/SignInServlet" method="post">
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="sname" >用户名</span>
-            <input type="text" class="form-control" value="" name="username" placeholder="UserName" aria-describedby="sizing-addon1">
+            <input type="text" class="form-control" value="" name="username" onblur="checkUserName()" placeholder="UserName" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password" >密码</span>
@@ -105,7 +122,7 @@
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="rpassword" >确认密码</span>
-            <input type="password" class="form-control" value="" name="rpassword" placeholder="password" aria-describedby="sizing-addon1">
+            <input type="password" class="form-control" value="" onblur="checkPwd()" name="rpassword" placeholder="password" aria-describedby="sizing-addon1">
         </div><br>
         <div class="input-group input-group-lg">
             <span class="input-group-addon" id="tel" >电话</span>

@@ -17,7 +17,7 @@ import java.util.Random;
  * @create 2022-03-12 23:23
  */
 public class SendSmsUtil {
-    public static String SendSms() {
+    public static String SendSms(String tel) {
         /**
          * 1.导包
          * 2.把实例代码导到项目里
@@ -38,7 +38,7 @@ public class SendSmsUtil {
         request.setDomain("dysmsapi.aliyuncs.com");
         request.setVersion("2017-05-25");
         request.setAction("SendSms");
-        request.putQueryParameter("PhoneNumbers", "15039947675");
+        request.putQueryParameter("PhoneNumbers", tel);
         request.putQueryParameter("SignName", "阿里云短信测试");
         request.putQueryParameter("TemplateCode", "SMS_154950909");
         // 产生验证码
@@ -51,7 +51,7 @@ public class SendSmsUtil {
         try {
             CommonResponse response = client.getCommonResponse(request);
             // Message : ok 发送短信成功
-//            System.out.println(response.getData());
+            System.out.println(response.getData());
         } catch (ClientException e) {
             e.printStackTrace();
         }

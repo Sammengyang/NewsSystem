@@ -12,7 +12,7 @@
 <body>
 <div class="header">
     <div class="header_in">
-        <img src="./images/tit.png">
+        <img src="images/tit.png">
         <div class="quit text_center">安全退出</div>
     </div>
 
@@ -30,15 +30,14 @@
 
 
     <div class="main_fx">
-
         <div class="AccountManagement_c_iframe">
-            <iframe src="./view/account/AccountManagement.jsp"></iframe>
+            <iframe src="view/account/AccountManagement.jsp"></iframe>
         </div>
 
     </div>
 </div>
 </body>
 <script type="text/javascript" src="/js/jquery-3.6.0.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 
 </html>
