@@ -1,4 +1,4 @@
-package com.zmy.dao.Impl;
+package com.zmy.dao;
 
 /**
  * @author Sam  Email:superdouble@yeah.net

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class Account {
     private String userName; // 用户名
+    private String Name; // 姓名
     private String password; // 密码
     private String tel;      // 手机号
     private List<Colunmn> colunmns; // 能查看和发布的栏目
@@ -17,8 +18,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(String userName, String password, String tel, List<Colunmn> colunmns, String role) {
+    public Account(String userName, String name, String password, String tel, List<Colunmn> colunmns, String role) {
         this.userName = userName;
+        Name = name;
         this.password = password;
         this.tel = tel;
         this.colunmns = colunmns;
@@ -29,6 +31,14 @@ public class Account {
         this.userName = username;
         this.tel = tel;
         this.password = password;
+    }
+
+    public Account(String userName, String name, String password, String tel, String role) {
+        this.userName = userName;
+        this.Name = name;
+        this.password = password;
+        this.tel = tel;
+        this.role = role;
     }
 
     public String getUserName() {

@@ -14,6 +14,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "SignInServlet", value = "/SignInServlet")
 public class SignInServlet extends HttpServlet {
@@ -21,7 +22,22 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("SignInServlet...doget。。。");
+        // 验证用户名是否可用
+        String username = request.getParameter("username");
+        Account account = signService.CheckUserName(username);
+        System.out.println(account.toString());
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        if (account!=null){
+            out.write("success");
+            out.flush();
+            out.close();
+        }else {
+            out.write("false");
+            out.flush();
+            out.close();
+        }
     }
 
     @Override

@@ -18,20 +18,26 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
     <script type="text/javascript">
         $(function (){
-            $("input[name='sid']").blur(function (){
-                var sid = $("input[name='sid']").val();
+            $("input[name='username']").blur(function (){
+                var username = $("input[name='username']").val();
+                alert(username)
                 $.ajax({
                     type:"GET", // 提交数据类型
-                    url:"/AccountServlet", // 提交到哪个服务器
-                    data:"username="+sid, // 提交的数据
+                    url:"/SignInServlet", // 提交到哪个服务器
+                    data:"username="+username, // 提交的数据
                     dataType:"text", // 提交的数据类型
                     success:function (d){ // d 回调函数 ，服务器执行完之后，接收服务器响应的数据
                         if (d=="success"){
                             $("span[id='span-sid']").html("账号已被使用");
+                            // 按钮失效
+                            $("#signin").attr("disabled",true);
                         }else{
                             $("span[id='span-sid']").html("");
+                            // 按钮生效
+                            $("#signin").attr("disabled",false);
                         }
                     },
                     error:function (d,errorThrown){

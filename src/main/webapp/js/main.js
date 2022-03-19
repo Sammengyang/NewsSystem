@@ -9,13 +9,13 @@ $(function(){
     
     // iframe  链接
     $(".AccountManagement").click(function(){
-        $(".AccountManagement_c_iframe iframe").attr("src","page/AccountManagement.html")
+        $(".AccountManagement_c_iframe iframe").attr("src","account/AccountManagement.jsp")
     })
     $(".ColumnManagement").click(function(){
-        $(".AccountManagement_c_iframe iframe").attr("src","page/ColumnManagement.html")
+        $(".AccountManagement_c_iframe iframe").attr("src","Column/ColumnManagement.jsp")
     })
     $(".NewsManagement").click(function(){
-        $(".AccountManagement_c_iframe iframe").attr("src","page/NewsManagement.html")
+        $(".AccountManagement_c_iframe iframe").attr("src","News/NewsManagement.jsp")
     })
 
 
