@@ -17,4 +17,12 @@ public interface ColunmnDao {
      * @return
      */
     List<Colunmn> getColList();
+
+    /**
+     *  根据用户名获取对应的栏目权限
+     *
+     * @param username 用户名
+     * @return
+     */
+    List<Colunmn> getColListByuserName(String username);
 }

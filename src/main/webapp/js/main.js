@@ -61,16 +61,59 @@ $(function(){
     // 编辑账户
     $("#edit_Account_btn").click(function(){
         $("#user_column").fadeIn(100);
-		alert("====");
 		//$("#user_column input[name='username']").val('aaaaa');
+        var username = $("input:radio[name='username']:checked").val()
+
+        $("#edit_name").html(username);
+        //通过get请求先将元数据传递过去
+        $.ajax({
+            type: "get", // 请求类型
+            url: "/EdtiAccountServlet",
+            data: "username="+username,// 请求数据
+            dataType: "text", // 数据类型
+        });
+
+
     })
     //删除账户
     $("#delete_Account_btn").click(function(){
         $("#delete_Account").fadeIn(100);
+        var username = $("input:radio[name='username']:checked").val();
+        $("#del_name").html(username);
+        // 点击确定按钮，确认删除
+        $("#delete_Account_ok_btn").click(function (){
+            $.ajax({
+                type:"post", // 请求类型
+                url:"/DelAccountServlet", // 接收请求的服务器
+                data:"username="+username, // 发送的数据
+                dataType:"text",        // 数据类型
+                success:function (d){ // 回调函数
+                    if (d=="success"){
+                        alert("删除成功！");
+                    }else{
+                        alert("删除失败！");
+                    }
+                },
+                error:function (d,data){
+                    alert("删除异常！")
+                }
+            });
+        });
+
     })
     // 编辑账户
     $("#ac_Account_btn").click(function(){
         $("#ac_Account").fadeIn(100);
+        // 获取选中的用户名
+        var username = $("input:radio[name='username']:checked").val();
+        $("#gant_name").html(username);
+        alert(username);
+        $.ajax({
+            type:"get", // 请求方式
+            url:"/GrantServlet",     // 处理请求的服务器
+            data:"username="+username, // 数据
+            dataType:"text", // 数据类型
+        })
     })
 
 

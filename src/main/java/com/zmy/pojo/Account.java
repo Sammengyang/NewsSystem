@@ -18,6 +18,7 @@ public class Account {
     public Account() {
     }
 
+
     public Account(String userName, String name, String password, String tel, List<Colunmn> colunmns, String role) {
         this.userName = userName;
         Name = name;
@@ -27,11 +28,11 @@ public class Account {
         this.role = role;
     }
 
-    public Account(String username, String tel, String password,String name) {
+    public Account(String username,String password, String tel, String role) {
         this.userName = username;
         this.tel = tel;
         this.password = password;
-        this.Name = name;
+        this.role = role;
     }
 
     public Account(String userName, String name, String password, String tel, String role) {

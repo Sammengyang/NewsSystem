@@ -1,5 +1,4 @@
-package com.zmy.Utils;
-
+import com.zmy.Utils.SendSmsUtil;
 import com.zmy.dao.AccountDao;
 import com.zmy.dao.AuthDao;
 import com.zmy.dao.ColunmnDao;
@@ -8,6 +7,8 @@ import com.zmy.dao.Impl.ColunmnDaoImpl;
 import com.zmy.dao.Impl.accountDaoImpl;
 import com.zmy.pojo.Account;
 import com.zmy.pojo.Colunmn;
+import com.zmy.service.AuthService;
+import com.zmy.service.Impl.AuthServiceImpl;
 import com.zmy.service.Impl.SignServiceImpl;
 import com.zmy.service.SignService;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class Test1 {
     private final AuthDao authDao = new AuthDaoImpl();
     private final AccountDao accountDao = new accountDaoImpl();
     private ColunmnDao colunmnDao = new ColunmnDaoImpl();
+    private AuthService authService = new AuthServiceImpl();
 
     @Test
     public void test(){
@@ -52,5 +54,33 @@ public class Test1 {
         account.setUserName("sam");
         authDao.authtoAccount(account);
     }
-
+    // 测试添加新账户
+    @Test
+    public void testadd(){
+        AuthService authService = new AuthServiceImpl();
+        authService.addAccount("1001","1");
+    }
+    // 测试查询账户
+    @Test
+    public void testQueryAll(){
+        List<Account> accountList = authDao.QueryAllAccount();
+        System.out.println(accountList.get(4).toString());
+    }
+    // 测试删除
+    @Test
+    public void delAccount(){
+        int i = authDao.delAccount("2018105210149");
+        System.out.println(i);
+    }
+    // 测试修改
+    @Test
+    public void editAccount(){
+        authDao.changeAccount("1001","s1","1");
+    }
+    // 测试给指定用户授栏目权限
+    @Test
+    public void grantColtoAccount(){
+        int i = authService.grantColunmntoAccount("s2", "教务处","财务处");
+        System.out.println("i = " + i);
+    }
 }

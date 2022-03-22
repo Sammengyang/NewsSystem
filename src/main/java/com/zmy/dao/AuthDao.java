@@ -1,6 +1,9 @@
 package com.zmy.dao;
 
 import com.zmy.pojo.Account;
+import com.zmy.pojo.Colunmn;
+
+import java.util.List;
 
 /**
  * @author Sam  Email:superdouble@yeah.net
@@ -26,11 +29,25 @@ public interface AuthDao {
 //    void UpdateAccountRole(String userName,int [] roid);
 
     /**
+     *  获取所有栏目
+     *
+     * @return
+     */
+    List<Colunmn> getAllColunmn();
+
+    /**
      *  给新注册的用户所有栏目权限
      *
      * @param account
      */
     void authtoAccount(Account account);
+
+    /**
+     *  查询所有账户
+     *
+     * @return
+     */
+    List<Account> QueryAllAccount();
 
     /**
      *  添加账户
@@ -45,14 +62,30 @@ public interface AuthDao {
      *
      * @param username
      */
-    void delAccount(String username);
+    int delAccount(String username);
 
     /**
-     *  修改账户
      *
      * @param username 原用户名
-     * @param cusername 修改后的用户名
+     * @param editName 修改后的用户名
      * @param password 密码
+     * @return 修改的条数
      */
-    void changeAccount(String username,String cusername,String password);
+    int changeAccount(String username,String editName,String password);
+
+    /**
+     *  根据栏目名称获取栏目id
+     *
+     * @param colunmns
+     * @return
+     */
+    List<Integer> getColIdByColName(String...colunmns);
+
+    /**
+     *  给指定用户名账户授栏目权限
+     *
+     * @param username 用户名
+     * @param colunmns 栏目权限
+     */
+    int grantColunmntoAccount(String username,String...colunmns);
 }

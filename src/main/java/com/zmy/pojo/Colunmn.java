@@ -7,14 +7,14 @@ package com.zmy.pojo;
  */
 public class Colunmn {
     private Integer colid; // 栏目id
-    private String ColName; // 栏目名称
+    private String colName; // 栏目名称
 
     public Colunmn() {
     }
 
     public Colunmn(Integer colid, String colName) {
         this.colid = colid;
-        ColName = colName;
+        this.colName = colName;
     }
 
     public Integer getColid() {
@@ -26,18 +26,18 @@ public class Colunmn {
     }
 
     public String getColName() {
-        return ColName;
+        return colName;
     }
 
     public void setColName(String colName) {
-        ColName = colName;
+        this.colName = colName;
     }
 
     @Override
     public String toString() {
         return "Colunmn{" +
                 "colid=" + colid +
-                ", ColName='" + ColName + '\'' +
+                ", colName='" + colName + '\'' +
                 '}';
     }
 }

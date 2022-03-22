@@ -2,7 +2,11 @@ package com.zmy.service.Impl;
 
 import com.zmy.dao.AuthDao;
 import com.zmy.dao.Impl.AuthDaoImpl;
+import com.zmy.pojo.Account;
+import com.zmy.pojo.Colunmn;
 import com.zmy.service.AuthService;
+
+import java.util.List;
 
 /**
  * @author Sam  Email:superdouble@yeah.net
@@ -11,6 +15,16 @@ import com.zmy.service.AuthService;
  */
 public class AuthServiceImpl implements AuthService {
     private final AuthDao authDao = new AuthDaoImpl();
+
+    /**
+     *  获取所有栏目
+     *
+     * @return
+     */
+    @Override
+    public List<Colunmn> getAllColunmn() {
+        return authDao.getAllColunmn();
+    }
 
     /**
      *  添加用户
@@ -29,8 +43,8 @@ public class AuthServiceImpl implements AuthService {
      * @param username 用户名
      */
     @Override
-    public void delAccount(String username) {
-        authDao.delAccount(username);
+    public int delAccount(String username) {
+        return authDao.delAccount(username);
     }
 
     /**
@@ -39,9 +53,25 @@ public class AuthServiceImpl implements AuthService {
      * @param username 原用户名
      * @param cusername 修改后的用户名
      * @param password 密码
+     * @return 修改的条数
      */
     @Override
-    public void changeAccount(String username, String cusername, String password) {
-        authDao.changeAccount(username,cusername,password);
+    public int changeAccount(String username, String cusername, String password) {
+        return authDao.changeAccount(username,cusername,password);
+    }
+
+    /**
+     *  获取所有账户信息
+     *
+     * @return
+     */
+    @Override
+    public List<Account> getAllAccount() {
+        return authDao.QueryAllAccount();
+    }
+
+    @Override
+    public int grantColunmntoAccount(String username, String... colunmns) {
+        return authDao.grantColunmntoAccount(username,colunmns);
     }
 }
