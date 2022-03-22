@@ -80,4 +80,141 @@ public class ColunmnDaoImpl implements ColunmnDao {
         }
         return colunmnList;
     }
+
+    /**
+     *  添加栏目
+     *
+     * @param colId   栏目id
+     * @param colName 栏目名称
+     */
+    @Override
+    public int addColunmn(Integer colId, String colName) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int count = 0;
+        try {
+            con = DBUtil.getCon();
+            String sql = "insert into colunmn (colId,colName) values (?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,colId);
+            ps.setObject(2,colName);
+            count = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return count;
+    }
+
+    /**
+     *  根据栏目id删除栏目
+     *
+     * @param colId 栏目id
+     * @return
+     */
+    @Override
+    public int delColunmn(Integer colId) {
+        int count = 0; // 操作的数据条数
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "delete from colunmn where colId=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,colId);
+            count = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return count;
+    }
+
+    /**
+     *  根据id修改栏目信息
+     *
+     * @param colId    原栏目id
+     * @param editId   修改的id
+     * @param editName 修改的名字
+     * @return
+     */
+    @Override
+    public int editColunmn(Integer colId, Integer editId, String editName) {
+        int count = 0;
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update colunmn set colId=?,colName=? where colId=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,editId);
+            ps.setObject(2,editName);
+            ps.setObject(3,colId);
+            count = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return count;
+    }
+
+    @Override
+    public List<Colunmn> SerchColunmnByColName(String colName) {
+        List<Colunmn> colunmnList = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from colunmn where colName like ?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,"%"+colName+"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Colunmn colunmn = new Colunmn(
+                        rs.getInt("colId"),
+                        rs.getString("colName")
+                );
+                colunmnList.add(colunmn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return colunmnList;
+    }
+
+    /**
+     *  根据栏目名称获取id
+     *
+     * @param colName 栏目名称
+     * @return
+     */
+    @Override
+    public Integer getColIdByColName(String colName) {
+        Integer colId = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from colunmn where colName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,colName);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                colId = rs.getInt("colId");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return colId;
+    }
+
+
 }

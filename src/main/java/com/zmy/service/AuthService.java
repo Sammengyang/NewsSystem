@@ -59,4 +59,13 @@ public interface AuthService {
      * @param colunmns 栏目权限
      */
     int grantColunmntoAccount(String username,String...colunmns);
+
+    /**
+     *  根据用户名获取账户信息  （模糊查询）
+     *
+     * @param username
+     * @return
+     */
+    List<Account> getAccountByUserName(String username);
+
 }

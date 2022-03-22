@@ -1,4 +1,4 @@
-package com.zmy.dao;
+package com.zmy.service;
 
 import com.zmy.pojo.Colunmn;
 
@@ -7,24 +7,16 @@ import java.util.List;
 /**
  * @author Sam  Email:superdouble@yeah.net
  * @Description
- * @create 2022-03-19 15:00
+ * @create 2022-03-22 17:44
  */
-public interface ColunmnDao {
+public interface ColunmnService {
 
     /**
-     *  获取所有栏目编号和名字
+     *  获取所有栏目
      *
      * @return
      */
-    List<Colunmn> getColList();
-
-    /**
-     *  根据用户名获取对应的栏目权限
-     *
-     * @param username 用户名
-     * @return
-     */
-    List<Colunmn> getColListByuserName(String username);
+    List<Colunmn> getAllColunmn();
 
     /**
      *  添加栏目
@@ -59,12 +51,4 @@ public interface ColunmnDao {
      * @return
      */
     List<Colunmn> SerchColunmnByColName(String colName);
-
-    /**
-     *   根据栏目名字获取栏目id
-     *
-     * @param colName 栏目名称
-     * @return
-     */
-    Integer getColIdByColName(String colName);
 }

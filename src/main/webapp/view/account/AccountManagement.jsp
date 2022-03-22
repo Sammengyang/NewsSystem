@@ -18,14 +18,18 @@
 <div class="AccountManagement_c " id="AccountManagement_c">
     <h3>账户管理
         <div class="amcl fr">
-            <input type="text" placeholder="用户名" class="fl" name="">
-            <div class="search fl"><img src="../../images/search.png"></div>
+            <form action="/SerchAccountServlet" method="post">
+                <input type="text" placeholder="用户名" class="fl" name="serch_username">
+                <div class="search fl">
+                    <button type="submit" class="search fl" style="margin: 0;border: none;padding: 0;background-color: transparent"><img src="../../images/search.png"></button>
+                </div>
+            </form>
         </div>
     </h3>
     <c:if test="${sessionScope.account.role==1}">
         <div class="AM_ct text_center">
             <div class="AM_ct_in">
-                <div class="add_btn df_btn fl" id="add_Account_btn">添加</div>
+                <div class="add_btn df_btn fl" id="add_Account_btn" >添加</div>
                 <div class="edit_btn df_btn fl" id="edit_Account_btn">编辑</div>
                 <div class="delete_btn df_btn fl" id="delete_Account_btn">删除</div>
                 <div class="fr df_btn ac_btn" id="ac_Account_btn">账号授权</div>
@@ -34,20 +38,20 @@
     </c:if>
     <c:if test="${sessionScope.account.role!=1}">
         <div class="AM_ct text_center">
-            <div class="delete_btn df_btn fl" id="delete_Account_btn1">注销账号</div>
-            <div class="fr df_btn ac_btn" id="ac_Account_btn1">修改个人信息</div>
+            <div class="fr df_btn ac_btn" id="logout" style="margin: 13px">注销个人账号</div>
+            <div class="fr df_btn ac_btn" id="ChangeInfo" style="margin-top: 13px">修改个人信息</div>
         </div>
     </c:if>
     <div class="list">
         <ul class="list_h">
-            <li class="b20"><label><span>用户名</span></label></li>
+            <li class="b20"><label><input type="checkbox" name="" style="display: none"><span>用户名</span></label></li>
             <li class="b20"><label>密码</label></li>
             <li class="b60"><label>授权形式</label></li>
         </ul>
         <div class="list_b_c">
-            <ul class="list_null">
-                <li class="text_center">未添加管理员账户！</li>
-            </ul>
+<%--            <ul class="list_null">--%>
+<%--                <li class="text_center">未添加管理员账户！</li>--%>
+<%--            </ul>--%>
             <c:forEach items="${allAccount}" var="el">
                 <ul class="list_b">
                     <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>

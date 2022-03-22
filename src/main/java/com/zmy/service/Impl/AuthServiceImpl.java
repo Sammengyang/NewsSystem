@@ -74,4 +74,9 @@ public class AuthServiceImpl implements AuthService {
     public int grantColunmntoAccount(String username, String... colunmns) {
         return authDao.grantColunmntoAccount(username,colunmns);
     }
+
+    @Override
+    public List<Account> getAccountByUserName(String username) {
+        return authDao.getAccountByUserName(username);
+    }
 }

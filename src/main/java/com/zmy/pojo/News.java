@@ -9,7 +9,7 @@ import java.util.List;
  * @create 2022-03-19 8:59
  */
 public class News {
-    private Integer NewId; // 新闻编号
+    private Integer newId; // 新闻编号
     private String title; // 新闻标题
     private String content; // 新闻内容
     private List<Colunmn> colunmns; // 能发布到的栏目
@@ -20,7 +20,7 @@ public class News {
     }
 
     public News(Integer newId, String title, String content, List<Colunmn> colunmns, Date postTime, String name) {
-        NewId = newId;
+        this.newId = newId;
         this.title = title;
         this.content = content;
         this.colunmns = colunmns;
@@ -30,11 +30,11 @@ public class News {
 
 
     public Integer getNewId() {
-        return NewId;
+        return newId;
     }
 
     public void setNewId(Integer newId) {
-        NewId = newId;
+        this.newId = newId;
     }
 
     public String getTitle() {

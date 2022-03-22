@@ -8,7 +8,9 @@ import com.zmy.dao.Impl.accountDaoImpl;
 import com.zmy.pojo.Account;
 import com.zmy.pojo.Colunmn;
 import com.zmy.service.AuthService;
+import com.zmy.service.ColunmnService;
 import com.zmy.service.Impl.AuthServiceImpl;
+import com.zmy.service.Impl.ColunmnServiceImpl;
 import com.zmy.service.Impl.SignServiceImpl;
 import com.zmy.service.SignService;
 import org.junit.Test;
@@ -23,8 +25,11 @@ import java.util.List;
 public class Test1 {
     private final AuthDao authDao = new AuthDaoImpl();
     private final AccountDao accountDao = new accountDaoImpl();
-    private ColunmnDao colunmnDao = new ColunmnDaoImpl();
-    private AuthService authService = new AuthServiceImpl();
+    private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
+    private final AuthService authService = new AuthServiceImpl();
+    private final ColunmnService colunmnService = new ColunmnServiceImpl();
+
+
 
     @Test
     public void test(){
@@ -82,5 +87,11 @@ public class Test1 {
     public void grantColtoAccount(){
         int i = authService.grantColunmntoAccount("s2", "教务处","财务处");
         System.out.println("i = " + i);
+    }
+    // 测试栏目模糊查询
+    @Test
+    public void testSerchCol(){
+        List<Colunmn> colunmnList = colunmnService.SerchColunmnByColName("处");
+        System.out.println(colunmnList.get(1).toString());
     }
 }

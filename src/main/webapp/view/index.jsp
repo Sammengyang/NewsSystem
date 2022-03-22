@@ -26,8 +26,8 @@
             <div class="user_location fl">当前： 首页-<span>账户管理</span>  </div>
         </div>
         <div class="nav_side text_center fl">
-            <div class="nav AccountManagement active">账户管理</div>
-            <div class="nav ColumnManagement">栏目管理</div>
+            <div class="nav AccountManagement active" id="ac_Manage">账户管理</div>
+            <div class="nav ColumnManagement" id="col_Manage">栏目管理</div>
             <div class="nav NewsManagement">新闻管理</div>
         </div>
 
