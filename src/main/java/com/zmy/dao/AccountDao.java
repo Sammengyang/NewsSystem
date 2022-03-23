@@ -17,6 +17,12 @@ public interface AccountDao {
      */
     void Login(Account account);
 
+    /**
+     *  将自己账户注销
+     *
+     * @param username
+     */
+    void Unsubscribe(String username);
 
     /**
      *  通过用户名获取用户信息

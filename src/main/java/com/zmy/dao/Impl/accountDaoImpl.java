@@ -52,6 +52,28 @@ public class accountDaoImpl implements AccountDao {
     }
 
     /**
+     *   注销自己账户
+     *  删除手机号和密码
+     * @param username
+     */
+    @Override
+    public void Unsubscribe(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update account set tel='',password='' where userName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,username);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+    }
+
+    /**
      *  通过用户名获取用户信息
      *
      * @param userName 用户名

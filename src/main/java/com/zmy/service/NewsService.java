@@ -15,11 +15,11 @@ public interface NewsService {
 
 
     /**
-     *  获取所有新闻栏目
+     *  获取登录人负责的新闻栏目
      *
      * @return
      */
-    List<Colunmn> getAllColunmn();
+    List<Colunmn> getRespColunmn(String username);
 
     /**
      *  获取所有新闻

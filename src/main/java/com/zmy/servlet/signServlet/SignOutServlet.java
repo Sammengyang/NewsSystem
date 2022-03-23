@@ -21,6 +21,8 @@ public class SignOutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // 清除session域中数据
+        request.getSession().invalidate();
+        response.sendRedirect("../../Sign/Sign_up.jsp");
     }
 }

@@ -133,10 +133,13 @@ $(function () {
         }
     })
 
-    // 注销账户
-    $("#logout").click(function () {
-
-    })
+    // // 注销账户
+    // $("#Unsubscribe").click(function () {
+    //     $.ajax({
+    //         type:"post",
+    //         url:"/UnsubscribeServlet",
+    //     });
+    // })
 
     //修改信息
     $("#ChangeInfo").click(function () {
@@ -216,13 +219,21 @@ $(function () {
            url:"/ManagementServlet",
         });
     });
-
+    // 栏目管理
     $("#col_Manage").click(function (){
         $.ajax({
             type:"post",
             url:"/ColManagementServlet",
         });
     });
+    // 新闻管理
+    $("#new_Manage").click(function (){
+        $.ajax({
+            type:"post",
+            url:"/NewManagementServlet",
+        });
+    });
+
 
     // 发布新闻
 

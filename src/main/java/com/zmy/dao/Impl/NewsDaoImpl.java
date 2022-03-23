@@ -4,6 +4,7 @@ import com.zmy.Utils.DBUtil;
 import com.zmy.Utils.DateUtil;
 import com.zmy.dao.ColunmnDao;
 import com.zmy.dao.NewsDao;
+import com.zmy.pojo.Colunmn;
 import com.zmy.pojo.News;
 
 import java.sql.Connection;
@@ -54,10 +55,38 @@ public class NewsDaoImpl implements NewsDao {
         return newId;
     }
 
+    /**
+     *  获取登录人负责的新闻栏目
+     *
+     * @return
+     */
     @Override
-    public List<News> getAllNews() {
-        return null;
+    public List<Colunmn> getRespColunmn(String username) {
+        List<Colunmn> list = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from colunmn c,user_col uc where c.colId=uc.colId AND uc.userName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,username);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Colunmn colunmn = new Colunmn(
+                        rs.getInt("colId"),
+                        rs.getString("colName")
+                );
+                list.add(colunmn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return list;
     }
+
 
     /**
      *  发布新闻

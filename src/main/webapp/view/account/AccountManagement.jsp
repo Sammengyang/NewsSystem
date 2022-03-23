@@ -13,6 +13,15 @@
 <head>
     <meta charset="utf-8">
     <link href="../../css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="AccountManagement_c " id="AccountManagement_c">
@@ -26,7 +35,7 @@
             </form>
         </div>
     </h3>
-    <c:if test="${sessionScope.account.role==1}">
+    <c:if test="${sessionScope.account.role==1 or sessionScope.account.role==3}">
         <div class="AM_ct text_center">
             <div class="AM_ct_in">
                 <div class="add_btn df_btn fl" id="add_Account_btn" >添加</div>
@@ -38,8 +47,9 @@
     </c:if>
     <c:if test="${sessionScope.account.role!=1}">
         <div class="AM_ct text_center">
-            <div class="fr df_btn ac_btn" id="logout" style="margin: 13px">注销个人账号</div>
-            <div class="fr df_btn ac_btn" id="ChangeInfo" style="margin-top: 13px">修改个人信息</div>
+            <div class="fr df_btn ac_btn" id="ChangeInfo" style="margin-top: 13px">
+                <button type="button" class="fr df_btn ac_btn" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>
+            </div>
         </div>
     </c:if>
     <div class="list">
@@ -52,17 +62,32 @@
 <%--            <ul class="list_null">--%>
 <%--                <li class="text_center">未添加管理员账户！</li>--%>
 <%--            </ul>--%>
-            <c:forEach items="${allAccount}" var="el">
-                <ul class="list_b">
-                    <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
-                    <li class="b20"><label>${el.password}</label></li>
-                    <li class="b60"><label>
-                        <c:forEach items="${el.colunmns}" var="col">
-                            <span>${col.colName}</span>
-                        </c:forEach>
-                    </label></li>
-                </ul>
-            </c:forEach>
+            <c:if test="${sessionScope.account.role==1 or sessionScope.account.role==3}">
+                <c:forEach items="${allAccount}" var="el">
+                    <ul class="list_b">
+                        <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
+                        <li class="b20"><label>${el.password}</label></li>
+                        <li class="b60"><label>
+                            <c:forEach items="${el.colunmns}" var="col">
+                                <span>${col.colName}</span>
+                            </c:forEach>
+                        </label></li>
+                    </ul>
+                </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.account.role==2}">
+                <c:forEach items="${allAccount}" var="el">
+                    <ul class="list_b">
+                        <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
+                        <li class="b20"><label>******</label></li>
+                        <li class="b60"><label>
+                            <c:forEach items="${el.colunmns}" var="col">
+                                <span>${col.colName}</span>
+                            </c:forEach>
+                        </label></li>
+                    </ul>
+                </c:forEach>
+            </c:if>
         </div>
         <div class="pull_page">
             <div class="fl pull_page_up">上一页</div>
@@ -174,7 +199,25 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
-<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="../../js/main.js"></script>
 </html>

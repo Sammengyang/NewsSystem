@@ -23,18 +23,18 @@ public class NewsServiceImpl implements NewsService {
     private final NewsDao newsDao = new NewsDaoImpl();
 
     /**
-     *  获取所有新闻栏目
+     *  获取登录人负责的栏目
      *
      * @return
      */
     @Override
-    public List<Colunmn> getAllColunmn() {
-        return colunmnService.getAllColunmn();
+    public List<Colunmn> getRespColunmn(String username) {
+        return newsDao.getRespColunmn(username);
     }
 
     @Override
     public List<News> getAllNews() {
-        return newsDao.getAllNews();
+        return null;
     }
 
 

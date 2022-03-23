@@ -1,6 +1,6 @@
 package com.zmy.dao;
 
-import com.zmy.pojo.News;
+import com.zmy.pojo.Colunmn;
 
 import java.util.List;
 
@@ -19,11 +19,13 @@ public interface NewsDao {
     Integer RandomNewsId();
 
     /**
-     *  获取所有新闻
+     *  获取登录人负责的新闻栏目
      *
      * @return
      */
-    List<News> getAllNews();
+    List<Colunmn> getRespColunmn(String username);
+
+
 
     /**
      *  发布新闻

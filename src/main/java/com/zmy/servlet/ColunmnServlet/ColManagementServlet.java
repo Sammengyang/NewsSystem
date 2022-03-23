@@ -27,6 +27,7 @@ public class ColManagementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("ColManagementServlet");
         List<Colunmn> allColunmn = colunmnService.getAllColunmn();
         request.getSession().setAttribute("allColunmn",allColunmn);
         response.sendRedirect("../../view/Column/ColumnManagement.jsp");

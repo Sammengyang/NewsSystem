@@ -19,7 +19,7 @@
         <div class="amcl fr">
             <form action="/SerchNewsServlet" method="post">
                 <select class="fl NewsManagement_search" id="SerchColName">
-                    <c:forEach items="${allColunmn}" var="el">
+                    <c:forEach items="${respColunmn}" var="el">
                         <option value=${el.colName}>${el.colName}</option>
                     </c:forEach>
                 </select>
@@ -44,7 +44,7 @@
                     <div class="column_name">
                         <label class="text_center">栏目</label>
                         <select class="column_name_release" name="PostColName">
-                            <c:forEach items="${allColunmn}" var="el">
+                            <c:forEach items="${respColunmn}" var="el">
                                 <option value=${el.colName}>${el.colName}</option>
                             </c:forEach>
                         </select>

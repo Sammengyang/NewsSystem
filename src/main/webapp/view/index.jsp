@@ -28,7 +28,7 @@
         <div class="nav_side text_center fl">
             <div class="nav AccountManagement active" id="ac_Manage">账户管理</div>
             <div class="nav ColumnManagement" id="col_Manage">栏目管理</div>
-            <div class="nav NewsManagement">新闻管理</div>
+            <div class="nav NewsManagement" id="new_Manage">新闻管理</div>
         </div>
 
 
