@@ -16,6 +16,7 @@ import java.util.List;
 public class AuthServiceImpl implements AuthService {
     private final AuthDao authDao = new AuthDaoImpl();
 
+
     /**
      *  获取所有栏目
      *

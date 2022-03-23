@@ -94,4 +94,9 @@ public class Test1 {
         List<Colunmn> colunmnList = colunmnService.SerchColunmnByColName("处");
         System.out.println(colunmnList.get(1).toString());
     }
+    // 测试上传图片
+    @Test
+    public void testUpload(){
+        accountDao.uploadPicture("sys","45656");
+    }
 }

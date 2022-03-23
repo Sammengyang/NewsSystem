@@ -12,14 +12,22 @@ public class News {
     private Integer newId; // 新闻编号
     private String title; // 新闻标题
     private String content; // 新闻内容
-    private List<Colunmn> colunmns; // 能发布到的栏目
+    private Colunmn colunmns; // 能发布到的栏目
     private Date postTime; // 发布时间
     private String Name; // 发布人
 
     public News() {
     }
 
-    public News(Integer newId, String title, String content, List<Colunmn> colunmns, Date postTime, String name) {
+
+    public News(Integer newId, String title, String content, Date postTime,Colunmn colunmns ) {
+        this.newId = newId;
+        this.title = title;
+        this.content = content;
+        this.colunmns = colunmns;
+        this.postTime = postTime;
+    }
+    public News(Integer newId, String title, String content, Colunmn colunmns, Date postTime, String name) {
         this.newId = newId;
         this.title = title;
         this.content = content;
@@ -53,11 +61,11 @@ public class News {
         this.content = content;
     }
 
-    public List<Colunmn> getColunmns() {
+    public Colunmn getColunmns() {
         return colunmns;
     }
 
-    public void setColunmns(List<Colunmn> colunmns) {
+    public void setColunmns(Colunmn colunmns) {
         this.colunmns = colunmns;
     }
 

@@ -161,6 +161,12 @@ public class ColunmnDaoImpl implements ColunmnDao {
         return count;
     }
 
+    /**
+     *  通过栏目名称查询栏目  （模糊查询）
+     *
+     * @param colName
+     * @return
+     */
     @Override
     public List<Colunmn> SerchColunmnByColName(String colName) {
         List<Colunmn> colunmnList = new ArrayList<>();

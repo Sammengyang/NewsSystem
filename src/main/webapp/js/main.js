@@ -15,7 +15,7 @@ $(function () {
         $(".AccountManagement_c_iframe iframe").attr("src", "Column/ColumnManagement.jsp")
     })
     $(".NewsManagement").click(function () {
-        $(".AccountManagement_c_iframe iframe").attr("src", "News/NewsManagement.jsp")
+        $(".AccountManagement_c_iframe iframe").attr("src", "News/AlltheNews.jsp")
     })
 
 
@@ -57,6 +57,8 @@ $(function () {
         $("#add_column").fadeOut(100);
         $("#edit_column").fadeOut(100);
         $("#delete_column").fadeOut(100);
+        $("#edit_news").fadeOut(100);
+        $("#delete_news").fadeOut(100);
     })
     // 编辑账户
     $("#edit_Account_btn").click(function () {
@@ -169,8 +171,8 @@ $(function () {
                 dataType:"text",
             });
         }
-
     })
+
     // 删除栏目
     $("#delete_column_btn").click(function () {
         $("#delete_column").fadeIn(100);
@@ -197,15 +199,74 @@ $(function () {
     // 编辑栏目
     $("#edit_column_btn1").click(function () {
         alert("对不起，您的权限不足！");
-
-
     })
     // 删除栏目
     $("#delete_column_btn1").click(function () {
         alert("对不起，您的权限不足！");
-
     })
 
+// 新闻管理 --
+    // 编辑
+    $("#edit_new_btn").click(function () {
+        $("#edit_news").fadeIn(100);
+        // 获取选中的新闻
+        var newId = $("input:radio[name='newsId']:checked").val();
+        $("#edit_colid").html(newId);
+        if (typeof (newId) == "undefined") {
+            alert("请先选择栏目！")
+            $("#edit_new_ok_btn").attr("disabled", true); // 按钮失效
+        } else {
+            $("#edit_new_ok_btn").attr("disabled", false); // 按钮生效
+            $.ajax({
+                type:"get",
+                url:"/EditNewsServlet",
+                data:"newId="+newId,
+                dataType:"text",
+                success:function (d){
+                    if (d=="success"){
+                        $("input[name='editTitle']").attr("value",d);
+                    }else{
+                        $("input[name='editTitle']").attr("value",d);
+                    }
+                },
+                error:function (d,data){
+                    alert("编辑失败！")
+                }
+            });
+        }
+
+    })
+    // 删除新闻
+    $("#delete_new_btn").click(function () {
+        $("#delete_news").fadeIn(100);
+        // 获取选中的栏目id
+        var newId = $("input:radio[name='newId']:checked").val();
+        $("#del_colid").html(newId);
+        if (typeof (newId) == "undefined") {
+            alert("请先选择栏目！")
+            $("#delete_new_ok_btn").attr("disabled", true); // 按钮失效
+        } else {
+            $("#delete_new_ok_btn").attr("disabled", false); // 按钮生效
+            $.ajax({
+                type:"post",
+                url:"/DelNewsServlet",
+                data:"newId="+newId,
+                dataType:"text",
+            });
+        }
+    })
+
+
+
+
+    // 编辑新闻
+    $("#edit_new_btn1").click(function () {
+        alert("对不起，您的权限不足！");
+    })
+    // 删除新闻
+    $("#delete_new_btn1").click(function () {
+        alert("对不起，您的权限不足！");
+    })
 
 
 
@@ -230,12 +291,12 @@ $(function () {
     $("#new_Manage").click(function (){
         $.ajax({
             type:"post",
-            url:"/NewManagementServlet",
+            url:"/ShowAllNewsServlet",
         });
     });
 
 
-    // 发布新闻
+
 
 
 

@@ -16,23 +16,12 @@
 <!-- 新闻管理 -->
 <div class="AccountManagement_c" id="NewsManagement_c">
     <h3>新闻管理
-        <div class="amcl fr">
-            <form action="/SerchNewsServlet" method="post">
-                <select class="fl NewsManagement_search" id="SerchColName">
-                    <c:forEach items="${respColunmn}" var="el">
-                        <option value=${el.colName}>${el.colName}</option>
-                    </c:forEach>
-                </select>
-                <input type="text" placeholder="标题名" class="fl" name="SerchTitle">
-                <div class="search fl">
-                    <button type="submit" class="search fl" style="margin: 0;border: none;padding: 0;background-color: transparent"><img src="../../images/search.png"></button>
-                </div>
-            </form>
-        </div>
+
     </h3>
     <div class="list" id="release_news">
         <ul class="list_h">
             <li class="b80"><label>发布新闻</label></li>
+            <li><label><a href="/ShowAllNewsServlet" style="color: #33698a">历史发布</a></label></li>
         </ul>
         <div class="list_b_c" id="release_news_in">
             <div class="release_news">

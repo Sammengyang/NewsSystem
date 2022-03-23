@@ -51,5 +51,60 @@ public class NewsServiceImpl implements NewsService {
         newsDao.postNew(title,colName,content,userName);
     }
 
+    /**
+     *  根据用户获取账户负责的新闻发布历史
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public List<News> getWithinNewsByUserName(String username) {
+        return newsDao.getWithinNewsByUserName(username);
+    }
+
+    /**
+     *  修改新闻发布到的栏目
+     *
+     * @param newId   新闻id
+     * @param colName 栏目
+     */
+    @Override
+    public void EditNew(Integer newId, String colName ,String title) {
+        newsDao.EditNew(newId,colName,title);
+    }
+
+    /**
+     *  通过新闻id获取到新闻标题
+     *
+     * @param newId
+     * @return
+     */
+    @Override
+    public String getTitleByNewId(Integer newId) {
+        return newsDao.getTitleByNewId(newId);
+    }
+
+    /**
+     *  获取栏目下所有新闻
+     *
+     * @param colName 栏目名
+     * @return
+     */
+    @Override
+    public List<News> getAllNewsByColName(String colName) {
+        return newsDao.getAllNewsByColName(colName);
+    }
+
+    /**
+     *  获取栏目下标题名包含title的新闻
+     *
+     * @param colName 栏目名
+     * @param title   标题
+     * @return
+     */
+    @Override
+    public List<News> getAllNewsByCollNameAndTitle(String colName, String title) {
+        return newsDao.getAllNewsByCollNameAndTitle(colName,title);
+    }
 
 }

@@ -10,6 +10,22 @@ import com.zmy.pojo.Account;
 public interface AccountDao {
 
     /**
+     *  根据登录账户获取头像
+     *
+     * @param username  用户名
+     * @return
+     */
+    String getHeadPic(String username);
+
+    /**
+     *  下载头像
+     *
+     * @param username
+     * @return
+     */
+    String DownloadPic(String username);
+
+    /**
      * 注册
      * 将该账户添加入Account表中
      *
@@ -39,4 +55,12 @@ public interface AccountDao {
      * @param password 新密码
      */
     int ChangePasswordByTel(String tel,String password);
+
+    /**
+     *  头像的图片名字存入数据库中
+     *
+     * @param username  用户名
+     * @param fileName  图片名
+     */
+    void uploadPicture(String username,String fileName);
 }

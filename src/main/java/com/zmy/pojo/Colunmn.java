@@ -17,6 +17,10 @@ public class Colunmn {
         this.colName = colName;
     }
 
+    public Colunmn(String colName) {
+        this.colName = colName;
+    }
+
     public Integer getColid() {
         return colid;
     }

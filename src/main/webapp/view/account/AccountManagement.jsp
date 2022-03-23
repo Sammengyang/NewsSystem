@@ -45,7 +45,7 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${sessionScope.account.role!=1}">
+    <c:if test="${sessionScope.account.role == 2}">
         <div class="AM_ct text_center">
             <div class="fr df_btn ac_btn" id="ChangeInfo" style="margin-top: 13px">
                 <button type="button" class="fr df_btn ac_btn" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>

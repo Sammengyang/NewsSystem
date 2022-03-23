@@ -8,6 +8,14 @@ package com.zmy.service;
 public interface AccountSaervice {
 
     /**
+     *  根据登录账户获取头像
+     *
+     * @param username  用户名
+     * @return
+     */
+    String getHeadPic(String username);
+
+    /**
      *  将自己账户注销
      *
      * @param username

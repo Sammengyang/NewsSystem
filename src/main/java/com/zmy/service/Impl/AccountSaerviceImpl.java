@@ -13,6 +13,11 @@ public class AccountSaerviceImpl implements AccountSaervice {
 
     private final AccountDao accountDao = new accountDaoImpl();
 
+    @Override
+    public String getHeadPic(String username) {
+        return accountDao.getHeadPic(username);
+    }
+
     /**
      *  注销自己账户
      *

@@ -19,6 +19,56 @@ import java.sql.SQLException;
 public class accountDaoImpl implements AccountDao {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
+    @Override
+    public String getHeadPic(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select img from account where userName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,username);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("img");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return null;
+    }
+
+    /**
+     *  下载头像
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public String DownloadPic(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select img from account where userName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,username);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getString("img");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps,rs);
+        }
+        return null;
+    }
+
     /**
      * 注册
      * 将该账户添加入Account表中
@@ -132,5 +182,29 @@ public class accountDaoImpl implements AccountDao {
             DBUtil.closeAll(con,ps);
         }
         return 0;
+    }
+
+    /**
+     *  头像的图片名字存入数据库中
+     *
+     * @param username  用户名
+     * @param fileName  图片名
+     */
+    @Override
+    public void uploadPicture(String username, String fileName) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "update account set img=? where userName=?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,fileName);
+            ps.setObject(2,username);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
     }
 }

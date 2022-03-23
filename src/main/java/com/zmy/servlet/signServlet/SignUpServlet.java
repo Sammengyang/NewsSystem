@@ -5,9 +5,13 @@ package com.zmy.servlet.signServlet; /**
  * @create 2022-03-18 17:38
  */
 
+import com.zmy.dao.AccountDao;
+import com.zmy.dao.Impl.accountDaoImpl;
 import com.zmy.pojo.Account;
 import com.zmy.pojo.Colunmn;
+import com.zmy.service.AccountSaervice;
 import com.zmy.service.AuthService;
+import com.zmy.service.Impl.AccountSaerviceImpl;
 import com.zmy.service.Impl.AuthServiceImpl;
 import com.zmy.service.Impl.SignServiceImpl;
 import com.zmy.service.SignService;
@@ -22,6 +26,7 @@ import java.util.List;
 public class SignUpServlet extends HttpServlet {
     private final SignService signService = new SignServiceImpl();
     private final AuthService authService = new AuthServiceImpl();
+    private final AccountSaervice accountSaervicea = new AccountSaerviceImpl();
 
 
     @Override
@@ -43,6 +48,10 @@ public class SignUpServlet extends HttpServlet {
                 // 获取所有栏目
                 List<Colunmn> allColunmn = authService.getAllColunmn();
                 request.getSession().setAttribute("allColunmn",allColunmn);
+                // 获取头像名字
+                String fileName = accountSaervicea.getHeadPic(username);
+                request.getSession().setAttribute("fileName",fileName);
+                System.out.println("fileName = " + fileName);
                 response.sendRedirect("../../view/index.jsp");
             }
         }else{

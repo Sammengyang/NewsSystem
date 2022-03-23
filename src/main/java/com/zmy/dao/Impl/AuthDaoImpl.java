@@ -21,6 +21,7 @@ import java.util.List;
 public class AuthDaoImpl implements AuthDao {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
+
     /**
      * 获取所有栏目
      *

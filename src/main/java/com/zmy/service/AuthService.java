@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface AuthService {
 
+
     /**
      *  获取所有栏目
      *
