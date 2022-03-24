@@ -38,23 +38,28 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        if (username.length()!=0&&password.length()!=0){
-            Account account = signService.SignUp(username, password);
-            if (account!=null){ //返回不为空登录成功
-                request.getSession().setAttribute("account",account);
-                // 查询所有账户
-                List<Account> allAccount = authService.getAllAccount();
-                request.getSession().setAttribute("allAccount",allAccount);
-                // 获取所有栏目
-                List<Colunmn> allColunmn = authService.getAllColunmn();
-                request.getSession().setAttribute("allColunmn",allColunmn);
-                // 获取头像名字
-                String fileName = accountSaervicea.getHeadPic(username);
-                request.getSession().setAttribute("fileName",fileName);
-                System.out.println("fileName = " + fileName);
-                response.sendRedirect("../../view/index.jsp");
+        if (username.length() != 0 && password.length() != 0) {
+//            Account account = signService.SignUp(username, password);
+            Account account = accountSaervicea.getPrivateInfo(username);
+            if (account != null) { //返回不为空登录成功
+                if (account.getPassword().equals(password)) {
+                    request.getSession().setAttribute("account", account);
+                    // 查询所有账户
+                    List<Account> allAccount = authService.getAllAccount();
+                    request.getSession().setAttribute("allAccount", allAccount);
+                    // 获取所有栏目
+                    List<Colunmn> allColunmn = authService.getAllColunmn();
+                    request.getSession().setAttribute("allColunmn", allColunmn);
+                    // 获取头像名字
+                    String fileName = accountSaervicea.getHeadPic(username);
+                    request.getSession().setAttribute("fileName", fileName);
+                    System.out.println("fileName = " + fileName);
+                    response.sendRedirect("../../view/index.jsp");
+                } else {
+                    response.sendRedirect("../../view/Sign_up.jsp");
+                }
             }
-        }else{
+        } else {
             response.sendRedirect("../../view/Sign_up.jsp");
         }
     }

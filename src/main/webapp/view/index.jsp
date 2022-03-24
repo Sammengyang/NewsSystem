@@ -58,7 +58,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- 头像 Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -70,7 +70,7 @@
                 <form action="/PicUploadServlet" method="post" enctype="multipart/form-data">
                     <div>
                         <img src=>
-                        <img src=${sessionScope.fileName} alt="" style="width: 400px;height: 400px">
+                        <img src="${sessionScope.fileName}" alt="" style="width: 400px;height: 400px">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">File input</label>

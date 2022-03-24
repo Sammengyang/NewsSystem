@@ -19,9 +19,8 @@ public class Account {
     }
 
 
-    public Account(String userName, String name, String password, String tel, List<Colunmn> colunmns, String role) {
+    public Account(String userName, String password, String tel, List<Colunmn> colunmns, String role) {
         this.userName = userName;
-        Name = name;
         this.password = password;
         this.tel = tel;
         this.colunmns = colunmns;

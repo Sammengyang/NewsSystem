@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author zzy
+ * @author Sam
  * @create 2021-11-24-19:29
  */
 public class DateUtil {

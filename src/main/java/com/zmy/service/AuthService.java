@@ -14,6 +14,13 @@ public interface AuthService {
 
 
     /**
+     *  将该账户设置为管理员
+     *
+     * @param username 用户名
+     */
+    void SetAdmin(String username);
+
+    /**
      *  获取所有栏目
      *
      * @return

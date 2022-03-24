@@ -62,15 +62,14 @@ $(function () {
     })
     // 编辑账户
     $("#edit_Account_btn").click(function () {
-        $("#user_column").fadeIn(100);
         //$("#user_column input[name='username']").val('aaaaa');
         var username = $("input:radio[name='username']:checked").val()
         $("#edit_name").html(username);
-        alert(username);
         if (typeof (username) == "undefined") {
             alert("请先选择操作账户！");
             $("#edit_Account_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#user_column").fadeIn(100);
             $("#edit_Account_ok_btn").attr("disabled", false); // 按钮生效
             //通过get请求先将元数据传递过去
             $.ajax({
@@ -85,13 +84,13 @@ $(function () {
     })
     //删除账户
     $("#delete_Account_btn").click(function () {
-        $("#delete_Account").fadeIn(100);
         var username = $("input:radio[name='username']:checked").val();
         $("#del_name").html(username);
         if (typeof (username) == "undefined") {
             alert("请先选择操作账户！");
             $("#delete_Account_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#delete_Account").fadeIn(100);
             // 点击确定按钮，确认删除
             $("#delete_Account_ok_btn").click(function () {
                 $("#delete_Account_ok_btn").attr("disabled", false); // 按钮生效
@@ -115,9 +114,8 @@ $(function () {
         }
 
     })
-    // 编辑账户
+    // 账号授权
     $("#ac_Account_btn").click(function () {
-        $("#ac_Account").fadeIn(100);
         // 获取选中的用户名
         var username = $("input:radio[name='username']:checked").val();
         $("#gant_name").html(username);
@@ -125,6 +123,7 @@ $(function () {
             alert("请先选择操作账户！");
             $("#ac_Account_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#ac_Account").fadeIn(100);
             $("#ac_Account_ok_btn").attr("disabled", false); // 按钮生效
             $.ajax({
                 type: "get", // 请求方式
@@ -143,10 +142,6 @@ $(function () {
     //     });
     // })
 
-    //修改信息
-    $("#ChangeInfo").click(function () {
-
-    })
 
     // 栏目管理 -
     // 添加栏目
@@ -155,7 +150,6 @@ $(function () {
     })
     // 编辑栏目
     $("#edit_column_btn").click(function () {
-        $("#edit_column").fadeIn(100);
         // 获取选中的栏目id
         var colid = $("input:radio[name='colid']:checked").val();
         $("#edit_colid").html(colid);
@@ -163,19 +157,19 @@ $(function () {
             alert("请先选择栏目！")
             $("#edit_column_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#edit_column").fadeIn(100);
             $("#edit_column_ok_btn").attr("disabled", false); // 按钮生效
             $.ajax({
-                type:"get",
-                url:"/editColunmnServlet",
-                data:"colid="+colid,
-                dataType:"text",
+                type: "get",
+                url: "/editColunmnServlet",
+                data: "colid=" + colid,
+                dataType: "text",
             });
         }
     })
 
     // 删除栏目
     $("#delete_column_btn").click(function () {
-        $("#delete_column").fadeIn(100);
         // 获取选中的栏目id
         var colid = $("input:radio[name='colid']:checked").val();
         $("#del_colid").html(colid);
@@ -183,12 +177,13 @@ $(function () {
             alert("请先选择栏目！")
             $("#delete_column_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#delete_column").fadeIn(100);
             $("#delete_column_ok_btn").attr("disabled", false); // 按钮生效
             $.ajax({
-                type:"post",
-                url:"/delColunmnServlet",
-                data:"colid="+colid,
-                dataType:"text",
+                type: "post",
+                url: "/delColunmnServlet",
+                data: "colid=" + colid,
+                dataType: "text",
             });
         }
     })
@@ -208,28 +203,28 @@ $(function () {
 // 新闻管理 --
     // 编辑
     $("#edit_new_btn").click(function () {
-        $("#edit_news").fadeIn(100);
         // 获取选中的新闻
         var newId = $("input:radio[name='newsId']:checked").val();
         $("#edit_colid").html(newId);
         if (typeof (newId) == "undefined") {
-            alert("请先选择栏目！")
+            alert("请先选择新闻！")
             $("#edit_new_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#edit_news").fadeIn(100);
             $("#edit_new_ok_btn").attr("disabled", false); // 按钮生效
             $.ajax({
-                type:"get",
-                url:"/EditNewsServlet",
-                data:"newId="+newId,
-                dataType:"text",
-                success:function (d){
-                    if (d=="success"){
-                        $("input[name='editTitle']").attr("value",d);
-                    }else{
-                        $("input[name='editTitle']").attr("value",d);
+                type: "get",
+                url: "/EditNewsServlet",
+                data: "newId=" + newId,
+                dataType: "text",
+                success: function (d) {
+                    if (d == "success") {
+                        $("input[name='editTitle']").attr("value", d);
+                    } else {
+                        $("input[name='editTitle']").attr("value", d);
                     }
                 },
-                error:function (d,data){
+                error: function (d, data) {
                     alert("编辑失败！")
                 }
             });
@@ -238,25 +233,23 @@ $(function () {
     })
     // 删除新闻
     $("#delete_new_btn").click(function () {
-        $("#delete_news").fadeIn(100);
         // 获取选中的栏目id
         var newId = $("input:radio[name='newId']:checked").val();
         $("#del_colid").html(newId);
         if (typeof (newId) == "undefined") {
-            alert("请先选择栏目！")
+            alert("请先选择新闻！")
             $("#delete_new_ok_btn").attr("disabled", true); // 按钮失效
         } else {
+            $("#delete_news").fadeIn(100);
             $("#delete_new_ok_btn").attr("disabled", false); // 按钮生效
             $.ajax({
-                type:"post",
-                url:"/DelNewsServlet",
-                data:"newId="+newId,
-                dataType:"text",
+                type: "post",
+                url: "/DelNewsServlet",
+                data: "newId=" + newId,
+                dataType: "text",
             });
         }
     })
-
-
 
 
     // 编辑新闻
@@ -269,38 +262,32 @@ $(function () {
     })
 
 
-
-
 // 导航栏
     // 账户管理
-    $("#ac_Manage").click(function (){
+    $("#ac_Manage").click(function () {
         // window.location.href="/ManagementServlet";
         $.ajax({
-           type:"post",
-           url:"/ManagementServlet",
+            type: "post",
+            url: "/ManagementServlet",
         });
     });
     // 栏目管理
-    $("#col_Manage").click(function (){
+    $("#col_Manage").click(function () {
         $.ajax({
-            type:"post",
-            url:"/ColManagementServlet",
+            type: "post",
+            url: "/ColManagementServlet",
         });
     });
     // 新闻管理
-    $("#new_Manage").click(function (){
+    $("#new_Manage").click(function () {
         $.ajax({
-            type:"post",
-            url:"/ShowAllNewsServlet",
+            type: "post",
+            url: "/ShowAllNewsServlet",
         });
     });
 
 
-
-
-
-
-    // 确定 btn 
+    // 确定 btn
     $("#add_Account_ok_btn").click(function () {
         $("#add_Account").fadeOut(100);
     })

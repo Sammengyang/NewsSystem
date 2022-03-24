@@ -41,6 +41,12 @@
                 <div class="add_btn df_btn fl" id="add_Account_btn" >添加</div>
                 <div class="edit_btn df_btn fl" id="edit_Account_btn">编辑</div>
                 <div class="delete_btn df_btn fl" id="delete_Account_btn">删除</div>
+                <div class="fr df_btn ac_btn">
+                    <button type="button" class="fr df_btn ac_btn" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>
+                </div>
+                <div class="fr df_btn ac_btn">
+                    <button type="button" class="fr df_btn ac_btn" id="Set_admin" style="margin:0;padding: 0;border: none;background-color: transparent">设置管理员</button>
+                </div>
                 <div class="fr df_btn ac_btn" id="ac_Account_btn">账号授权</div>
             </div>
         </div>
@@ -48,7 +54,7 @@
     <c:if test="${sessionScope.account.role == 2}">
         <div class="AM_ct text_center">
             <div class="fr df_btn ac_btn" id="ChangeInfo" style="margin-top: 13px">
-                <button type="button" class="fr df_btn ac_btn" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>
+                <button type="button" class="fr df_btn ac_btn" id="privateInfo" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>
             </div>
         </div>
     </c:if>
@@ -184,7 +190,7 @@
                 <span class="fr add_Account_close"><img src="../../images/close.png"></span>
             </div>
         </div>
-        &nbsp;&nbsp;正在给 “<span id="gant_name"></span>”账户授权
+        &nbsp;&nbsp;正在给“<span id="gant_name"></span>”账户授权
         <form method="post" action="/GrantServlet">
             <ul>
     <%--            <li><label><input type="checkbox" name="">&nbsp;<span>教务处</span></label></li>--%>
@@ -205,15 +211,51 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Private Information</h4>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form action="/ChangeInfoServlet" method="post">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon">用户名</span>
+                        <input type="text" class="form-control" value="${account.userName}" name="username"  aria-describedby="sizing-addon2">
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon1">密码</span>
+                        <input type="text" class="form-control" value="${account.password}" name="password" aria-describedby="sizing-addon2">
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon3">手机号</span>
+                        <input type="text" class="form-control" value="${account.tel}" name="tel" aria-describedby="sizing-addon2">
+                    </div><br>
+                    <div class="input-group">
+                        <c:if test="${account.role==1}">
+                            <span class="input-group-addon" id="sizing-addon4">权限等级</span>
+                            <input type="text" class="form-control" value="超级管理员" readonly="readonly" aria-describedby="sizing-addon2">
+                        </c:if>
+                        <c:if test="${account.role==2}">
+                            <span class="input-group-addon" id="sizing-addon4">权限等级</span>
+                            <input type="text" class="form-control" value="普通账户" readonly="readonly" aria-describedby="sizing-addon2">
+                        </c:if>
+                        <c:if test="${account.role==3}">
+                            <span class="input-group-addon" id="sizing-addon4">权限等级</span>
+                            <input type="text" class="form-control" value="管理员" readonly="readonly" aria-describedby="sizing-addon2">
+                        </c:if>
+                    </div><br>
+                    <c:set var="col" value=""></c:set>
+                    <c:forEach items="${account.colunmns}" var="col">
+                        <c:set var="col" value="${col.colName}"></c:set>
+                        <c:set var="str">${col},${str}</c:set>
+                    </c:forEach>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon5">栏目</span>
+                        <input type="text" class="form-control" readonly="readonly" aria-describedby="sizing-addon2" value="${str}" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

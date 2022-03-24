@@ -22,6 +22,11 @@ public class AuthDaoImpl implements AuthDao {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
 
+    @Override
+    public void SetAdmin(String username) {
+
+    }
+
     /**
      * 获取所有栏目
      *
