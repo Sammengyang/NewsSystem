@@ -59,6 +59,7 @@ $(function () {
         $("#delete_column").fadeOut(100);
         $("#edit_news").fadeOut(100);
         $("#delete_news").fadeOut(100);
+        $("#Set_admin").fadeOut(100);
     })
     // 编辑账户
     $("#edit_Account_btn").click(function () {
@@ -114,7 +115,7 @@ $(function () {
         }
 
     })
-    // 账号授权
+    // 栏目授权
     $("#ac_Account_btn").click(function () {
         // 获取选中的用户名
         var username = $("input:radio[name='username']:checked").val();
@@ -128,6 +129,26 @@ $(function () {
             $.ajax({
                 type: "get", // 请求方式
                 url: "/GrantServlet",     // 处理请求的服务器
+                data: "username=" + username, // 数据
+                dataType: "text", // 数据类型
+            });
+        }
+    })
+
+    // 账户授权
+    $("#Set_admin_btn").click(function () {
+        // 获取选中的用户名
+        var username = $("input:radio[name='username']:checked").val();
+        $("#gant_name").html(username);
+        if (typeof (username) == "undefined") {
+            alert("请先选择操作账户！");
+            $("#ac_Account_ok_btn").attr("disabled", true); // 按钮失效
+        } else {
+            $("#Set_admin").fadeIn(100);
+            $("#ac_Account_ok_btn").attr("disabled", false); // 按钮生效
+            $.ajax({
+                type: "get", // 请求方式
+                url: "/SetAdminServlet",     // 处理请求的服务器
                 data: "username=" + username, // 数据
                 dataType: "text", // 数据类型
             });

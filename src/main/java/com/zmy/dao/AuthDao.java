@@ -29,11 +29,11 @@ public interface AuthDao {
 //    void UpdateAccountRole(String userName,int [] roid);
 
     /**
-     *  将该账户设置为管理员
+     *  设置账户权限
      *
      * @param username 用户名
      */
-    void SetAdmin(String username);
+    void SetAdmin(String username,String role);
 
     /**
      *  获取所有栏目

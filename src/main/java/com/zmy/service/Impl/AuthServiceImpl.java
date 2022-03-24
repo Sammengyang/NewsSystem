@@ -18,13 +18,13 @@ public class AuthServiceImpl implements AuthService {
 
 
     /**
-     *  将该账户设置为管理员
+     *  设置账户权限
      *
      * @param username 用户名
      */
     @Override
-    public void SetAdmin(String username) {
-        authDao.SetAdmin(username);
+    public void SetAdmin(String username,String role) {
+        authDao.SetAdmin(username,role);
     }
 
     /**

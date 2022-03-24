@@ -44,10 +44,12 @@
                 <div class="fr df_btn ac_btn">
                     <button type="button" class="fr df_btn ac_btn" style="margin:0;padding: 0;border: none;background-color: transparent" data-toggle="modal" data-target="#myModal">查看个人信息</button>
                 </div>
-                <div class="fr df_btn ac_btn">
-                    <button type="button" class="fr df_btn ac_btn" id="Set_admin" style="margin:0;padding: 0;border: none;background-color: transparent">设置管理员</button>
-                </div>
-                <div class="fr df_btn ac_btn" id="ac_Account_btn">账号授权</div>
+                <c:if test="${sessionScope.account.role==1}">
+                    <div class="fr df_btn ac_btn">
+                        <button type="button" class="fr df_btn ac_btn" id="Set_admin_btn" style="margin:0;padding: 0;border: none;background-color: transparent">账户授权</button>
+                    </div>
+                </c:if>
+                <div class="fr df_btn ac_btn" id="ac_Account_btn">栏目授权</div>
             </div>
         </div>
     </c:if>
@@ -181,7 +183,7 @@
     </div>
 </div>
 
-<!-- 账户授权 -->
+<!-- 栏目授权 -->
 <div class="add_Account dn" id="ac_Account">
     <div class="add_Account_c">
         <div class="add_Account_h">
@@ -200,6 +202,30 @@
             </ul>
             <div class="add_Account_ok_btn text_center" >
                 <button type="submit" class="add_Account_ok_btn text_center" id="ac_Account_ok_btn" style="margin: 0;padding: 0;border: none; background-color: transparent;">保<i>呀</i>存</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 账户授权 -->
+<div class="add_Account dn" id="Set_admin">
+    <div class="add_Account_c">
+        <div class="add_Account_h">
+            <div class="add_Account_h_in">
+                账户授权
+                <span class="fr add_Account_close"><img src="../../images/close.png"></span>
+            </div>
+        </div>
+        &nbsp;&nbsp;正在修改“<span id="admin"></span>”的账户权限
+        <form method="post" action="/SetAdminServlet">
+            <div style="margin: 30px">
+                <input type="radio" name="role" value="2">普通账户
+            </div>
+            <div style="margin: 30px">
+                <input type="radio" name="role" value="3">管理员
+            </div>
+            <div class="add_Account_ok_btn text_center" >
+                <button type="submit" class="add_Account_ok_btn text_center" id="Set_admin_ok_btn" style="margin: 0;padding: 0;border: none; background-color: transparent;">确<i>呀</i>定</button>
             </div>
         </form>
     </div>

@@ -22,9 +22,26 @@ public class AuthDaoImpl implements AuthDao {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
 
+    /**
+     *  设置账户权限
+     *
+     * @param username 用户名
+     */
     @Override
-    public void SetAdmin(String username) {
-
+    public void SetAdmin(String username, String role) {
+        Connection con = DBUtil.getCon();
+        String sql = "update account set role=? where userName=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,role);
+            ps.setObject(2,username);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
     }
 
     /**
@@ -256,15 +273,15 @@ public class AuthDaoImpl implements AuthDao {
             ps.executeUpdate();
             if (ps != null)
                 ps.close();
-            if (colunmns != null){
+            if (colunmns != null) {
                 // 根据栏目名称获取栏目id
                 List<Integer> colIds = getColIdByColName(colunmns);
                 String sql1 = "insert into user_col (userName,ColId) values (?,?)";
                 PreparedStatement ps1 = con.prepareStatement(sql1);
                 // 将栏目权限循环插入数据库
                 for (int i = 0; i < colIds.size(); i++) {
-                    ps1.setObject(1,username);
-                    ps1.setObject(2,colIds.get(i));
+                    ps1.setObject(1, username);
+                    ps1.setObject(2, colIds.get(i));
                     ps1.executeUpdate();
                     count++;
                 }
@@ -287,7 +304,7 @@ public class AuthDaoImpl implements AuthDao {
             con = DBUtil.getCon();
             String sql = "select * from account where username like ? ";// todo
             ps = con.prepareStatement(sql);
-            ps.setObject(1,"%"+username+"%");
+            ps.setObject(1, "%" + username + "%");
             rs = ps.executeQuery();
             while (rs.next()) { // 获取每行的数据信息
                 String username1 = rs.getString("userName");
