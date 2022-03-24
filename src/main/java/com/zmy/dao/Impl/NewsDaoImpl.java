@@ -133,6 +133,44 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     /**
+     *  根据登录账户获取权限以内新闻总数
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Integer getWithinNewsCount(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Integer count = 0;
+        try {
+            // 获取登录人负责的栏目
+            List<Colunmn> colunmns = getRespColunmn(username);
+            // 获取栏目下的新闻
+            con = DBUtil.getCon();
+            String sql = "select COUNT(news.newId) count from news ,new_col nc,colunmn c \n" +
+                    "where news.newId = nc.newId  AND  c.colId=nc.colId  AND nc.colId = ?";
+            ps = con.prepareStatement(sql);
+            rs = null;
+            // 循环填充占位符
+            for (int i = 0; i < colunmns.size(); i++) {
+                ps.setObject(1, colunmns.get(i).getColid());
+                rs = ps.executeQuery();
+                // 获取对应栏目下的新闻
+                if (rs.next()) {
+                    count += rs.getInt("count");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con, ps, rs);
+        }
+        return count;
+    }
+
+    /**
      * 根据用户获取账户负责的新闻发布历史
      *
      * @param username
@@ -149,7 +187,8 @@ public class NewsDaoImpl implements NewsDao {
             List<Colunmn> colunmns = getRespColunmn(username);
             // 获取栏目下的新闻
             con = DBUtil.getCon();
-            String sql = "select * from news ,new_col nc,colunmn c where news.newId = nc.newId  AND  c.colId=nc.colId  AND nc.colId=?";
+            String sql = "select * from news ,new_col nc,colunmn c " +
+                    "where news.newId = nc.newId  AND  c.colId=nc.colId  AND nc.colId=?";
             ps = con.prepareStatement(sql);
             rs = null;
             // 循环填充占位符
@@ -175,6 +214,7 @@ public class NewsDaoImpl implements NewsDao {
         }
         return newsList;
     }
+
 
     /**
      *  修改新闻发布到的栏目

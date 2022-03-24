@@ -4,7 +4,9 @@ import com.zmy.dao.AuthDao;
 import com.zmy.dao.ColunmnDao;
 import com.zmy.dao.Impl.AuthDaoImpl;
 import com.zmy.dao.Impl.ColunmnDaoImpl;
+import com.zmy.dao.Impl.NewsDaoImpl;
 import com.zmy.dao.Impl.accountDaoImpl;
+import com.zmy.dao.NewsDao;
 import com.zmy.pojo.Account;
 import com.zmy.pojo.Colunmn;
 import com.zmy.service.AuthService;
@@ -28,7 +30,7 @@ public class Test1 {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
     private final AuthService authService = new AuthServiceImpl();
     private final ColunmnService colunmnService = new ColunmnServiceImpl();
-
+    private final NewsDao newsDao = new NewsDaoImpl();
 
 
     @Test
@@ -104,5 +106,12 @@ public class Test1 {
     public void testpage(){
         List<Account> allAccountByPage = authDao.getAllAccountByPage(1, 3);
         System.out.println(allAccountByPage.size());
+    }
+
+    // 测试获取新闻总数
+    @Test
+    public void testnewsCount(){
+        Integer sys = newsDao.getWithinNewsCount("sys");
+        System.out.println("sys = " + sys);
     }
 }

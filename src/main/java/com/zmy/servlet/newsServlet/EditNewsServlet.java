@@ -59,8 +59,10 @@ public class EditNewsServlet extends HttpServlet {
         // 修改新闻数据
         newsService.EditNew(newId,editColName,editTitle);
         // 重新获取该账户负责的新闻
-        List<News> newsList = newsService.getWithinNewsByUserName(userName);
-        request.getSession().setAttribute("newsList",newsList);
-        response.sendRedirect("../../view/News/AlltheNews.jsp");
+
+//        List<News> newsList = newsService.getWithinNewsByUserName(userName);
+//        request.getSession().setAttribute("newsList",newsList);
+//        response.sendRedirect("../../view/News/AlltheNews.jsp");
+        response.sendRedirect("/ShowAllNewsServlet");
     }
 }

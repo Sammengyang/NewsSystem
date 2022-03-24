@@ -32,10 +32,10 @@ public class NewsServiceImpl implements NewsService {
         return newsDao.getRespColunmn(username);
     }
 
-    @Override
-    public List<News> getAllNews() {
-        return null;
-    }
+//    @Override
+//    public List<News> getAllNews() {
+//        return null;
+//    }
 
 
     /**
@@ -52,6 +52,17 @@ public class NewsServiceImpl implements NewsService {
     }
 
     /**
+     *  根据登录账户获取权限以内新闻总数
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Integer getWithinNewsCount(String username) {
+        return newsDao.getWithinNewsCount(username);
+    }
+
+    /**
      *  根据用户获取账户负责的新闻发布历史
      *
      * @param username
@@ -61,6 +72,19 @@ public class NewsServiceImpl implements NewsService {
     public List<News> getWithinNewsByUserName(String username) {
         return newsDao.getWithinNewsByUserName(username);
     }
+
+    /**
+     *  根据用户获取账户负责的新闻发布历史  分页查询
+     *
+     * @param username   账户用户名
+     * @param pageNum    页数
+     * @param pageSize   每页条数
+     * @return
+     */
+//    @Override
+//    public List<News> getWithinNewsByUserName(String username, Integer pageNum, Integer pageSize) {
+//        return newsDao.getWithinNewsByUserName(username,pageNum,pageSize);
+//    }
 
     /**
      *  修改新闻发布到的栏目

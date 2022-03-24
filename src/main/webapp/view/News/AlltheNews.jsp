@@ -64,11 +64,11 @@
         </div>
 
         <div class="pull_page">
-            <div class="fl pull_page_up"><a>上一页</a></div>
+            <div class="fl pull_page_up"><a href="/ShowAllNewsServlet?npageNum=${sessionScope.npageNum -1 }">上一页</a></div>
             <ul>
                 <li><a href="#">${sessionScope.npageNum}</a></li>
             </ul>
-            <div class="fl pull_page_down"><a>下一页</a></div>
+            <div class="fl pull_page_down"><a href="/ShowAllNewsServlet?npageNum=${sessionScope.npageNum + 1}">下一页</a></div>
         </div>
 
 

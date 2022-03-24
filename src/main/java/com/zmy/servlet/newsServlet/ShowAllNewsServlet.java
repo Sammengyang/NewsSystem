@@ -24,7 +24,7 @@ public class ShowAllNewsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     @Override
@@ -35,10 +35,26 @@ public class ShowAllNewsServlet extends HttpServlet {
         String userName = account.getUserName();
         // 获取登录账户的栏目权限
         List<Colunmn> respColunmn = newsService.getRespColunmn(userName);
-        request.getSession().setAttribute("respColunmn",respColunmn);
+        request.getSession().setAttribute("respColunmn", respColunmn);
         // 根据用户栏目权限获取权限内新闻发布历史
-        List<News> newsList = newsService.getWithinNewsByUserName(userName);
-        request.getSession().setAttribute("newsList",newsList);
+        // 每页展示的条数
+        Integer pageSize = 1;
+        // 获取新闻总数   根据登录账户获取权限以内的新闻总数
+        Integer count = newsService.getWithinNewsCount(userName);
+        Integer MaxPageNum = (int) Math.ceil(count * 1.0 / pageSize); // 计算最大页数
+        // 获取页码
+        String num = request.getParameter("npageNum");
+        // 防止页码越界
+        if (num == null || "".equals(num) || Integer.parseInt(num) < 1) {
+            num = "1";
+        }
+        if (Integer.parseInt(num) > MaxPageNum){
+            num = String.valueOf(MaxPageNum);
+        }
+        Integer npageNum = Integer.parseInt(num);
+        List<News> newsList = newsService.getWithinNewsByUserName(userName).subList(npageNum*pageSize-pageSize,npageNum*pageSize);
+        request.getSession().setAttribute("newsList", newsList);
+        request.getSession().setAttribute("npageNum",npageNum);
         response.sendRedirect("../../view/News/AlltheNews.jsp");
     }
 }

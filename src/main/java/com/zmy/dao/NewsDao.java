@@ -39,12 +39,30 @@ public interface NewsDao {
     void postNew(String title,String colName,String content,String userName);
 
     /**
+     *  根据登录账户获取权限以内新闻总数
+     *
+     * @param username
+     * @return
+     */
+    Integer getWithinNewsCount(String username);
+
+    /**
      *  根据用户获取账户负责的新闻发布历史
      *
      * @param username
      * @return
      */
     List<News> getWithinNewsByUserName(String username);
+
+    /**
+     *  根据用户获取账户负责的新闻发布历史  分页查询
+     *
+     * @param username   账户用户名
+     * @param pageNum    页数
+     * @param pageSize   每页条数
+     * @return
+     */
+//    List<News> getWithinNewsByUserName(String username,Integer pageNum,Integer pageSize);
 
     /**
      *  修改新闻发布到的栏目
