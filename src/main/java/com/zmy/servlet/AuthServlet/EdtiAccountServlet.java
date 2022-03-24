@@ -34,13 +34,9 @@ public class EdtiAccountServlet extends HttpServlet {
         String password = request.getParameter("editPassword");
         int count = authService.changeAccount(username, editName, password);
         if (count > 0) {
-            // 读取所有数据
-            List<Account> allAccount = authService.getAllAccount();
-            // 覆盖域中原有数据
-            request.getSession().setAttribute("allAccount", allAccount);
-            response.sendRedirect("../../view/account/AccountManagement.jsp");
+            response.sendRedirect("/ManagementServlet");
         } else {
-            response.sendRedirect("../../view/account/AccountManagement.jsp");
+            response.sendRedirect("/ManagementServlet");
         }
     }
 }

@@ -22,6 +22,8 @@ public class delColunmnServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // todo 删除后页面不会刷新，因为用的ajax传递的数据，因此不会页面刷新
+        // 该问题在账户删除、栏目删除、新闻删除都存在
     }
 
     @Override
@@ -29,12 +31,9 @@ public class delColunmnServlet extends HttpServlet {
         Integer colid = Integer.parseInt(request.getParameter("colid"));
         int count = colunmnService.delColunmn(colid);
         if (count > 0) { // 删除成功
-            //重新获取栏目
-            List<Colunmn> allColunmn = colunmnService.getAllColunmn();
-            request.getSession().setAttribute("allColunmn",allColunmn);
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }else {
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }
     }
 }

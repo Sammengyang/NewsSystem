@@ -12,11 +12,27 @@ import java.util.List;
 public interface ColunmnDao {
 
     /**
+     *  获取栏目总数
+     *
+     * @return
+     */
+    Integer getColunmnCount();
+
+    /**
      *  获取所有栏目编号和名字
      *
      * @return
      */
     List<Colunmn> getColList();
+
+    /**
+     *  分页查询栏目
+     *
+     * @param pageNum   页数
+     * @param pageSize  每页的个数
+     * @return
+     */
+    List<Colunmn> getAllColunmnByPage(Integer pageNum,Integer pageSize);
 
     /**
      *  根据用户名获取对应的栏目权限

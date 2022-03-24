@@ -20,6 +20,31 @@ public class ColunmnDaoImpl implements ColunmnDao {
 
 
     /**
+     *  获取栏目总数
+     *
+     * @return
+     */
+    @Override
+    public Integer getColunmnCount() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select count(colId) count from colunmn";
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return 0;
+    }
+
+    /**
      *  获取所有栏目编号和名字
      *
      * @return
@@ -33,6 +58,42 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "select * from colunmn";
             ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Colunmn colunmn = new Colunmn(
+                        rs.getInt("colId"),
+                        rs.getString("colName")
+                );
+                colunmnList.add(colunmn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return colunmnList;
+    }
+
+    /**
+     *  分页查询栏目
+     *
+     * @param pageNum   页数
+     * @param pageSize  每页的个数
+     * @return
+     */
+    @Override
+    public List<Colunmn> getAllColunmnByPage(Integer pageNum, Integer pageSize) {
+        // 计算起始位置
+        Integer start = (pageNum - 1) * pageSize;
+        List<Colunmn> colunmnList = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from colunmn limit ?,?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,start);
+            ps.setObject(2,pageSize);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Colunmn colunmn = new Colunmn(

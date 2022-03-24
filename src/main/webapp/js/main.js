@@ -100,16 +100,6 @@ $(function () {
                     url: "/DelAccountServlet", // 接收请求的服务器
                     data: "username=" + username, // 发送的数据
                     dataType: "text",        // 数据类型
-                    success: function (d) { // 回调函数
-                        if (d == "success") {
-                            alert("删除成功！");
-                        } else {
-                            alert("删除失败！");
-                        }
-                    },
-                    error: function (d, data) {
-                        alert("删除异常！")
-                    }
                 });
             });
         }

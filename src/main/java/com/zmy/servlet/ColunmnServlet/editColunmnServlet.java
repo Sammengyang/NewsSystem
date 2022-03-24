@@ -37,12 +37,15 @@ public class editColunmnServlet extends HttpServlet {
         Integer editId = Integer.parseInt(request.getParameter("editId"));
         int count = colunmnService.editColunmn(colid, editId, editName);
         if (count > 0){
-            //从新获取栏目
-            List<Colunmn> allColunmn = colunmnService.getAllColunmn();
-            request.getSession().setAttribute("allColunmn",allColunmn);
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+//            //从新获取栏目
+//            List<Colunmn> allColunmn = colunmnService.getAllColunmn();
+//            request.getSession().setAttribute("allColunmn",allColunmn);
+//            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }else {
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+//            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }
+
     }
 }

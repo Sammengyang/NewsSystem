@@ -14,6 +14,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Queue;
 
 @WebServlet(name = "SerchAccountServlet", value = "/SerchAccountServlet")
 public class SerchAccountServlet extends HttpServlet {
@@ -27,14 +28,20 @@ public class SerchAccountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 查询的关键字
         String username = request.getParameter("serch_username");
-        if (username!=null){
+//        // 每页展示条数
+//        Integer pageSize = 1;
+//        // 获取查询结果的集合，计算最大页数
+//        Integer count = authService.getAcByUserNameCount(username);
+//        Integer MaxPageNum = (int)Math.ceil(count * 1.0 / pageSize);
+        if (username != null) {
             List<Account> allAccount = authService.getAccountByUserName(username);
-            request.getSession().setAttribute("allAccount",allAccount);
+            request.getSession().setAttribute("allAccount", allAccount);
             response.sendRedirect("../../view/account/AccountManagement.jsp");
-        }else {
+        } else {
             List<Account> allAccount = authService.getAllAccount();
-            request.getSession().setAttribute("allAccount",allAccount);
+            request.getSession().setAttribute("allAccount", allAccount);
             response.sendRedirect("../../view/account/AccountManagement.jsp");
         }
     }

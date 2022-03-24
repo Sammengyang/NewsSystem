@@ -26,16 +26,14 @@ public class AddAcountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("AddAcountServlet");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         // 添加账户
-        if (username.length()!=0&&password.length()!=0){
-            authService.addAccount(username,password);
-            // 查询所有账户
-            List<Account> allAccount = authService.getAllAccount();
-            request.getSession().setAttribute("allAccount",allAccount);
-            response.sendRedirect("../../view/account/AccountManagement.jsp");
+        if (username.length() != 0 && password.length() != 0) {
+            authService.addAccount(username, password);
+            response.sendRedirect("/ManagementServlet");
+        } else {
+            response.sendRedirect("/ManagementServlet");
         }
     }
 }

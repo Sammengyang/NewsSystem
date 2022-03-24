@@ -20,23 +20,17 @@ public class DelAccountServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         int count = authService.delAccount(username);
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter out = response.getWriter();
-        if (count > 0){
-            out.write("success");
-            out.flush();
-            out.close();
-        }else {
-            out.write("false");
-            out.flush();
-            out.close();
+        if (count > 0) {
+            response.sendRedirect("/ManagementServlet");
+        } else {
+            response.sendRedirect("/ManagementServlet");
         }
+
     }
 }

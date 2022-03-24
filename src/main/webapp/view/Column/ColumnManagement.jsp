@@ -57,16 +57,11 @@
         </div>
 
         <div class="pull_page">
-            <div class="fl pull_page_up">上一页</div>
+            <div class="fl pull_page_up"><a href="/ColManagementServlet?cpageNum=${sessionScope.cpageNum -1}">上一页</a></div>
             <ul>
-                <li class="on">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li class="pull_page_df_btn">…</li>
-                <li>12</li>
+                <li><a href="#">${sessionScope.cpageNum}</a></li>
             </ul>
-            <div class="fl pull_page_down">下一页</div>
+            <div class="fl pull_page_down"><a href="/ColManagementServlet?cpageNum=${sessionScope.cpageNum +1}">下一页</a></div>
         </div>
 
 

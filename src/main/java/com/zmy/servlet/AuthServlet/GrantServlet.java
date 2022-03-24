@@ -39,11 +39,13 @@ public class GrantServlet extends HttpServlet {
         String[] colunmns = request.getParameterValues("colunmn");
         int count = authService.grantColunmntoAccount(username, colunmns);
         if (count>0){
-            List<Account> allAccount = authService.getAllAccount();
-            request.getSession().setAttribute("allAccount",allAccount);
-            response.sendRedirect("../../view/account/AccountManagement.jsp");
+//            List<Account> allAccount = authService.getAllAccount();
+//            request.getSession().setAttribute("allAccount",allAccount);
+//            response.sendRedirect("../../view/account/AccountManagement.jsp");
+            response.sendRedirect("/ManagementServlet");
         }else {
-            response.sendRedirect("../../view/account/AccountManagement.jsp");
+//            response.sendRedirect("../../view/account/AccountManagement.jsp");
+            response.sendRedirect("/ManagementServlet");
         }
     }
 }

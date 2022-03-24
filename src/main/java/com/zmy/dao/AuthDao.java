@@ -57,6 +57,22 @@ public interface AuthDao {
     List<Account> QueryAllAccount();
 
     /**
+     *  获取账户总数
+     *
+     * @return
+     */
+    Integer getCount();
+
+    /**
+     *  分页查询账户信息
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    List<Account> getAllAccountByPage(Integer pageNum,Integer pageSize);
+
+    /**
      *  添加账户
      *
      * @param username 用户名
@@ -95,6 +111,14 @@ public interface AuthDao {
      * @param colunmns 栏目权限
      */
     int grantColunmntoAccount(String username,String...colunmns);
+
+    /**
+     *  获取用户名包含 username 的总条数
+     *
+     * @param username
+     * @return
+     */
+    Integer getAcByUserNameCount(String username);
 
     /**
      *  根据用户名获取账户信息  （模糊查询）

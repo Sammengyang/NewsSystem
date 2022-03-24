@@ -32,12 +32,14 @@ public class AddColunmnServlet extends HttpServlet {
         Integer colId = Integer.parseInt(request.getParameter("colId"));
         int count = colunmnService.addColunmn(colId, colName);
         if (count > 0){
-            //从新获取栏目
-            List<Colunmn> allColunmn = colunmnService.getAllColunmn();
-            request.getSession().setAttribute("allColunmn",allColunmn);
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+//            //从新获取栏目
+//            List<Colunmn> allColunmn = colunmnService.getAllColunmn();
+//            request.getSession().setAttribute("allColunmn",allColunmn);
+//            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }else {
-            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+//            response.sendRedirect("../../view/Column/ColumnManagement.jsp");
+            response.sendRedirect("/ColManagementServlet");
         }
     }
 }

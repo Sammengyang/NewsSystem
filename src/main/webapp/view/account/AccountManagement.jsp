@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%  request.setCharacterEncoding( "utf-8");%>
 <% response.setCharacterEncoding("utf-8"); %>
 <%--
@@ -98,20 +99,41 @@
             </c:if>
         </div>
         <div class="pull_page">
-            <div class="fl pull_page_up">上一页</div>
-            <ul>
-                <li class="on">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li class="pull_page_df_btn">…</li>
-                <li>12</li>
-            </ul>
-            <div class="fl pull_page_down">下一页</div>
+                <%--    根据数据条数获取页数  p      --%>
+<%--            <c:set var="p" value="0"></c:set>--%>
+<%--            <c:forEach var="el" items="${allAccount}">--%>
+<%--                <c:set var="p" value="${p+1}"></c:set>--%>
+<%--                <fmt:formatNumber value="${p/3 + (p/3 % 1 == 0 ? 0 : 0.5)}" type="number" pattern="#" />--%>
+<%--                <c:if test="${p%3==0}">--%>
+
+<%--                </c:if>--%>
+<%--            </c:forEach>--%>
+<%--            <div class="fl pull_page_up"><a href="/ManagementServlet?pageNum=${sessionScope.pageNum-1}">上一页</a></div>--%>
+<%--            <ul>--%>
+<%--                <li class="on"><a href="#">${sessionScope.pageNum}</a></li>--%>
+<%--&lt;%&ndash;                <li class="pull_page_df_btn">…</li>&ndash;%&gt;--%>
+<%--            </ul>--%>
+<%--            <div class="fl pull_page_down"><a href="/ManagementServlet?pageNum=${sessionScope.pageNum+1}">下一页</a></div>--%>
         </div>
-
-
+        <div style="margin-left: 100px;">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li style="margin-right:  20px">
+                        <a href="/ManagementServlet?pageNum=${sessionScope.pageNum-1}" aria-label="Previous">
+                            <span aria-hidden="true">上一页</span>
+                        </a>
+                    </li>
+                    <li style="margin-right:  20px"><a href="#">${sessionScope.pageNum}</a></li>
+                    <li style="margin-right:  20px">
+                        <a href="/ManagementServlet?pageNum=${sessionScope.pageNum+1}" aria-label="Next">
+                            <span aria-hidden="true">下一页</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
+
 </div>
 
 

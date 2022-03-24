@@ -81,11 +81,56 @@ public class AuthServiceImpl implements AuthService {
         return authDao.QueryAllAccount();
     }
 
+    /**
+     *  获取账户总数
+     *
+     * @return
+     */
+    @Override
+    public Integer getCount() {
+        return authDao.getCount();
+    }
+
+    /**
+     *  分页查询账户信息
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Account> getAllAccountByPage(Integer pageNum, Integer pageSize) {
+        return authDao.getAllAccountByPage(pageNum,pageSize);
+    }
+
+    /**
+     *  给指定用户名账户授栏目权限
+     *
+     * @param username 用户名
+     * @param colunmns 栏目权限
+     */
     @Override
     public int grantColunmntoAccount(String username, String... colunmns) {
         return authDao.grantColunmntoAccount(username,colunmns);
     }
 
+    /**
+     *  获取用户名包含 username 的总条数
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Integer getAcByUserNameCount(String username) {
+        return authDao.getAcByUserNameCount(username);
+    }
+
+    /**
+     *  根据用户名获取账户信息  （模糊查询）
+     *
+     * @param username
+     * @return
+     */
     @Override
     public List<Account> getAccountByUserName(String username) {
         return authDao.getAccountByUserName(username);

@@ -23,7 +23,7 @@ public class AuthDaoImpl implements AuthDao {
 
 
     /**
-     *  设置账户权限
+     * 设置账户权限
      *
      * @param username 用户名
      */
@@ -34,13 +34,13 @@ public class AuthDaoImpl implements AuthDao {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setObject(1,role);
-            ps.setObject(2,username);
+            ps.setObject(1, role);
+            ps.setObject(2, username);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
     }
 
@@ -140,6 +140,77 @@ public class AuthDaoImpl implements AuthDao {
     }
 
     /**
+     *  获取账户总数
+     *
+     * @return
+     */
+    @Override
+    public Integer getCount() {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "SELECT COUNT(userName) count FROM account";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) { // 获取每行的数据信息
+                 return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con, ps, rs);
+        }
+        return 0;
+    }
+
+    /**
+     * 分页查询账户信息
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Account> getAllAccountByPage(Integer pageNum, Integer pageSize) {
+        // 计算起始位置
+        Integer start = (pageNum - 1) * pageSize;
+        List<Account> accountList = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select * from account limit ?,?";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,start);
+            ps.setObject(2,pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) { // 获取每行的数据信息
+                String username = rs.getString("userName");
+                Account account = new Account(
+                        username,
+                        rs.getString("password"),
+                        rs.getString("tel"),
+                        rs.getString("role")
+                );
+                // 再根据用户名获取账户栏目权限
+                List<Colunmn> colunmnList = colunmnDao.getColListByuserName(username);
+                // 将获取的栏目权限集合赋给对应账户
+                account.setColunmns(colunmnList);
+                accountList.add(account);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con, ps, rs);
+        }
+        return accountList;
+    }
+
+
+    /**
      * 添加账户
      *
      * @param username 用户名
@@ -178,10 +249,17 @@ public class AuthDaoImpl implements AuthDao {
         PreparedStatement ps = null;
         int count = 0;
         try {
+            // 删除账户
             con = DBUtil.getCon();
             String sql = "delete from account where userName=?";
             ps = con.prepareStatement(sql);
             ps.setObject(1, username);
+            count = ps.executeUpdate();
+
+            // 删除栏目
+            String sql1 = "delete from user_col where userName=?";
+            ps = con.prepareStatement(sql1);
+            ps.setObject(1,username);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -294,6 +372,40 @@ public class AuthDaoImpl implements AuthDao {
         return count;
     }
 
+    /**
+     *  获取用户名包含 username 的总条数
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Integer getAcByUserNameCount(String username) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBUtil.getCon();
+            String sql = "select COUNT(userName) count from account where username like ? ";
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, "%" + username + "%");
+            rs = ps.executeQuery();
+            if (rs.next()) { // 获取数据总数
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con, ps, rs);
+        }
+        return 0;
+    }
+
+    /**
+     *  根据用户名获取账户信息  （模糊查询）
+     *
+     * @param username
+     * @return
+     */
     @Override
     public List<Account> getAccountByUserName(String username) {
         List<Account> accountList = new ArrayList<>();
@@ -302,7 +414,7 @@ public class AuthDaoImpl implements AuthDao {
         ResultSet rs = null;
         try {
             con = DBUtil.getCon();
-            String sql = "select * from account where username like ? ";// todo
+            String sql = "select * from account where username like ? ";
             ps = con.prepareStatement(sql);
             ps.setObject(1, "%" + username + "%");
             rs = ps.executeQuery();

@@ -99,4 +99,10 @@ public class Test1 {
     public void testUpload(){
         accountDao.uploadPicture("sys","45656");
     }
+    // 测试分页
+    @Test
+    public void testpage(){
+        List<Account> allAccountByPage = authDao.getAllAccountByPage(1, 3);
+        System.out.println(allAccountByPage.size());
+    }
 }

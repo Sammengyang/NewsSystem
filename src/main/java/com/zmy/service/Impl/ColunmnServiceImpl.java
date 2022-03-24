@@ -17,6 +17,16 @@ public class ColunmnServiceImpl implements ColunmnService {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
     /**
+     *  获取栏目总数
+     *
+     * @return
+     */
+    @Override
+    public Integer getColunmnCount() {
+        return colunmnDao.getColunmnCount();
+    }
+
+    /**
      *  获取所有栏目
      *
      * @return
@@ -24,6 +34,18 @@ public class ColunmnServiceImpl implements ColunmnService {
     @Override
     public List<Colunmn> getAllColunmn() {
         return colunmnDao.getColList();
+    }
+
+    /**
+     *  分页查询栏目
+     *
+     * @param pageNum   页数
+     * @param pageSize  每页的个数
+     * @return
+     */
+    @Override
+    public List<Colunmn> getAllColunmnByPage(Integer pageNum, Integer pageSize) {
+        return colunmnDao.getAllColunmnByPage(pageNum,pageSize);
     }
 
     /**
