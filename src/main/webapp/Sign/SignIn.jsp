@@ -23,7 +23,6 @@
         $(function (){
             $("input[name='username']").blur(function (){
                 var username = $("input[name='username']").val();
-                alert(username)
                 $.ajax({
                     type:"GET", // 提交数据类型
                     url:"/SignInServlet", // 提交到哪个服务器
@@ -69,6 +68,11 @@
         function checkPwd(){
             var pwd = $("input[name='password']").val();
             var rpwd = $("input[name='rpassword']").val();
+            if (pwd=="" || rpwd==""){
+                $("#signin").attr("disabled",true);
+            }else{
+                $("#signin").attr("disabled",false);
+            }
             if (pwd!=""){
                 if (pwd==rpwd){
                     $("input[name='password']").css("border","2px green solid");
@@ -143,7 +147,7 @@
             <input type="button" id="send" value="获取验证码" class="btn btn-default" style="width: 150px;height: 46px">
         </div><br>
         <button type="submit" id="signin" class="btn btn-default" style="width: 210px;height: 40px;margin-right: 25px">注册</button>
-        <button type="button" class="btn btn-default" style="width: 210px;height: 40px" onclick="">登录</button>
+        <a href="Sign_up.jsp"><button type="button" class="btn btn-default" style="width: 210px;height: 40px" onclick="">登录</button></a>
     </form>
 </div>
 <div id="exist">

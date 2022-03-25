@@ -12,6 +12,22 @@ import java.util.List;
 public interface ColunmnService {
 
     /**
+     *  校验栏目名是否可用
+     *
+     * @param colName  栏目名
+     * @return
+     */
+    boolean CheckColName(String colName);
+
+    /**
+     *  校验栏目编号是否可用
+     *
+     * @param colId  栏目编号
+     * @return
+     */
+    boolean CheckColCid(Integer colId);
+
+    /**
      *  获取栏目总数
      *
      * @return

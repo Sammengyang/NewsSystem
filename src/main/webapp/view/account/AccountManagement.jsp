@@ -15,6 +15,7 @@
     <meta charset="utf-8">
     <link href="../../css/main.css" rel="stylesheet">
     <script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="../../js/main.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -73,28 +74,32 @@
 <%--            </ul>--%>
             <c:if test="${sessionScope.account.role==1 or sessionScope.account.role==3}">
                 <c:forEach items="${allAccount}" var="el">
-                    <ul class="list_b">
-                        <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
-                        <li class="b20"><label>${el.password}</label></li>
-                        <li class="b60"><label>
-                            <c:forEach items="${el.colunmns}" var="col">
-                                <span>${col.colName}</span>
-                            </c:forEach>
-                        </label></li>
-                    </ul>
+                    <c:if test="${el.role!=1}">
+                        <ul class="list_b">
+                            <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
+                            <li class="b20"><label>${el.password}</label></li>
+                            <li class="b60"><label>
+                                <c:forEach items="${el.colunmns}" var="col">
+                                    <span>${col.colName}</span>
+                                </c:forEach>
+                            </label></li>
+                        </ul>
+                    </c:if>
                 </c:forEach>
             </c:if>
             <c:if test="${sessionScope.account.role==2}">
                 <c:forEach items="${allAccount}" var="el">
-                    <ul class="list_b">
-                        <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
-                        <li class="b20"><label>******</label></li>
-                        <li class="b60"><label>
-                            <c:forEach items="${el.colunmns}" var="col">
-                                <span>${col.colName}</span>
-                            </c:forEach>
-                        </label></li>
-                    </ul>
+                    <c:if test="${el.role==2}">
+                        <ul class="list_b">
+                            <li class="b20"><label><input type="radio" name="username" value=${el.userName} ><span>${el.userName}</span></label></li>
+                            <li class="b20"><label>******</label></li>
+                            <li class="b60"><label>
+                                <c:forEach items="${el.colunmns}" var="col">
+                                    <span>${col.colName}</span>
+                                </c:forEach>
+                            </label></li>
+                        </ul>
+                    </c:if>
                 </c:forEach>
             </c:if>
         </div>
@@ -150,7 +155,7 @@
         <form action="/AddAcountServlet" method="post">
             <div class="user_name user_i">
                 <label>用户名</label>
-                <input type="text" placeholder="输入用户名" name="username" value="">
+                <input type="text" placeholder="输入用户名" id="add_username" name="username" value="">
             </div>
             <div class="user_password user_i">
                 <label>密<i>调</i>码</label>
@@ -176,7 +181,7 @@
                 <div class="column_now ">正在编辑 “<span id="edit_name"></span>”账户</div>
                 <div class="user_name user_i">
                     <label>用户名</label>
-                    <input type="text" placeholder="输入用户名" name="editName" value="">
+                    <input type="text" placeholder="输入用户名" id="edit_username" name="editName" value="">
                 </div>
                 <div class="user_password user_i">
                     <label>密<i>调</i>码</label>
@@ -295,7 +300,7 @@
                         <c:set var="str">${col},${str}</c:set>
                     </c:forEach>
                     <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon5">栏目</span>
+                        <span class="input-group-addon" id="sizing-addon5">负责栏目</span>
                         <input type="text" class="form-control" readonly="readonly" aria-describedby="sizing-addon2" value="${str}" >
                     </div>
                 </div>
@@ -309,5 +314,4 @@
 </div>
 
 </body>
-<script type="text/javascript" src="../../js/main.js"></script>
 </html>

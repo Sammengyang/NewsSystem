@@ -152,7 +152,6 @@ public class accountDaoImpl implements AccountDao {
             if (rs.next()){
                 account = new Account(
                         rs.getString("userName"),
-                        rs.getString("Name"),
                         rs.getString("password"),
                         rs.getString("tel"),
                         rs.getString("role")

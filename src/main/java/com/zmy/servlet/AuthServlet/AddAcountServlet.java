@@ -26,6 +26,7 @@ public class AddAcountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("AddAcountServlet");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         // 添加账户

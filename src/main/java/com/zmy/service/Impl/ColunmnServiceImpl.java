@@ -17,6 +17,28 @@ public class ColunmnServiceImpl implements ColunmnService {
     private final ColunmnDao colunmnDao = new ColunmnDaoImpl();
 
     /**
+     *  校验栏目名是否可用
+     *
+     * @param colName  栏目名
+     * @return
+     */
+    @Override
+    public boolean CheckColName(String colName) {
+        return colunmnDao.CheckColName(colName);
+    }
+
+    /**
+     *  校验栏目编号是否可用
+     *
+     * @param colId  栏目编号
+     * @return
+     */
+    @Override
+    public boolean CheckColCid(Integer colId) {
+        return colunmnDao.CheckColCid(colId);
+    }
+
+    /**
      *  获取栏目总数
      *
      * @return

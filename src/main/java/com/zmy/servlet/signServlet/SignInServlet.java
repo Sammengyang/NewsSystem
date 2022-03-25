@@ -20,13 +20,13 @@ import java.io.PrintWriter;
 public class SignInServlet extends HttpServlet {
     private final SignService signService = new SignServiceImpl();
 
+    // 使用ajax判断用户名是否已被使用
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("SignInServlet...doget。。。");
         // 验证用户名是否可用
         String username = request.getParameter("username");
         Account account = signService.CheckUserName(username);
-        System.out.println(account.toString());
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         if (account!=null){

@@ -45,6 +45,31 @@ $(function () {
 
     // 弹窗   all
     // z账户管理 -
+    // 检测用户名是否可用
+    $("#add_username").blur(function (){
+        // 获取输入的名字
+        var username = $("#add_username").val();
+        $.ajax({
+            type:"get",
+            url:"/SignInServlet",
+            data:"username="+username,
+            dataType:"text",
+            success:function (d){
+                if (d=="success"){
+                    alert("该用户名已被占用！");
+                    $("#add_Account_ok_btn").attr("disabled",true);
+                }else {
+                    $("#add_Account_ok_btn").attr("disabled",false);
+                }
+            },
+            error:function (d,data){
+                alert("添加异常！");
+            }
+        });
+    });
+
+
+
     // 添加账户
     $("#add_Account_btn").click(function () {
         $("#add_Account").fadeIn(100);
@@ -61,6 +86,28 @@ $(function () {
         $("#delete_news").fadeOut(100);
         $("#Set_admin").fadeOut(100);
     })
+
+    // 检测用户名是否可用
+    $("#edit_username").blur(function (){
+        // 获取输入的名字
+        var username = $("#edit_username").val();
+        $.ajax({
+            type:"get",
+            url:"/SignInServlet",
+            data:"username="+username,
+            dataType:"text",
+            success:function (d){
+                if (d=="success"){
+                    $("#edit_Account_ok_btn").attr("disabled",true);// 按钮失效
+                    alert("该用户名已被占用！");
+                }else {
+                    $("#edit_Account_ok_btn").attr("disabled",false);// 生效
+                }
+            },
+        });
+    });
+
+
     // 编辑账户
     $("#edit_Account_btn").click(function () {
         //$("#user_column input[name='username']").val('aaaaa');
@@ -89,7 +136,7 @@ $(function () {
         $("#del_name").html(username);
         if (typeof (username) == "undefined") {
             alert("请先选择操作账户！");
-            $("#delete_Account_ok_btn").attr("disabled", true); // 按钮失效
+            // $("#delete_Account_ok_btn").attr("disabled", true); // 按钮失效
         } else {
             $("#delete_Account").fadeIn(100);
             // 点击确定按钮，确认删除
@@ -155,6 +202,99 @@ $(function () {
 
 
     // 栏目管理 -
+    // 校验栏目和，栏目编号是否可用
+    // 添加时
+    $("input[name='colName']").blur(function (){
+        var colName = $("input[name='colName']").val();
+        $.ajax({
+            type: "get", // 请求类型
+            url: "/CheckColNameColIdServlet", // 接收请求的服务器
+            data: "colName=" + colName, // 发送的数据
+            dataType: "text",        // 数据类型
+            success:function (d){
+                if (d=="success"){
+                    // 可用
+                    $("#add_column_ok_btn").attr("disabled",false); // 按钮生效
+                }else {
+                    alert("栏目名重复！");
+                    $("#add_column_ok_btn").attr("disabled",true); // 按钮失效
+                }
+            },
+            error:function (d,data){
+                alert("异常错误！")
+            }
+        });
+    });
+    $("input[name='colId']").blur(function (){
+        var colId = $("input[name='colId']").val();
+        $.ajax({
+            type: "post", // 请求类型
+            url: "/CheckColNameColIdServlet", // 接收请求的服务器
+            data: "colId=" + colId, // 发送的数据
+            dataType: "text",        // 数据类型
+            success:function (d){
+                if (d=="success"){
+                    // 可用
+                    alert("s")
+                    $("#add_column_ok_btn").attr("disabled",false); // 按钮生效
+                }else {
+                    alert("栏目id重复！");
+                    $("#add_column_ok_btn").attr("disabled",true); // 按钮失效
+                }
+            },
+            error:function (d,data){
+                alert("异常错误！")
+            }
+        });
+    });
+
+    // 编辑时
+    $("input[name='editName']").blur(function (){
+        alert("撒地方");
+        var colName = $("input[name='editName']").val();
+        $.ajax({
+            type: "get", // 请求类型
+            url: "/CheckColNameColIdServlet", // 接收请求的服务器
+            data: "colName=" + colName, // 发送的数据
+            dataType: "text",        // 数据类型
+            success:function (d){
+                if (d=="success"){
+                    // 可用
+                    $("#edit_column_ok_btn").attr("disabled",false); // 按钮生效
+                }else {
+                    alert("栏目名重复！");
+                    $("#edit_column_ok_btn").attr("disabled",true); // 按钮失效
+                }
+            },
+            error:function (d,data){
+                alert("异常错误！")
+            }
+        });
+    });
+    $("input[name='editId']").blur(function (){
+        alert("撒地方");
+        var colId = $("input[name='editId']").val();
+        $.ajax({
+            type: "post", // 请求类型
+            url: "/CheckColNameColIdServlet", // 接收请求的服务器
+            data: "colId=" + colId, // 发送的数据
+            dataType: "text",        // 数据类型
+            success:function (d){
+                if (d=="success"){
+                    $("#edit_column_ok_btn").attr("disabled",false); // 按钮生效
+                }else {
+                    alert("栏目编号重复！")
+                    $("#edit_column_ok_btn").attr("disabled",true); // 按钮失效
+                }
+            },
+            error:function (d,data){
+                alert("异常错误！")
+            }
+        });
+    });
+
+
+
     // 添加栏目
     $("#add_column_btn").click(function () {
         $("#add_column").fadeIn(100);

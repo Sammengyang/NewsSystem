@@ -80,7 +80,7 @@
         </div>
         <form action="/AddColunmnServlet" method="post">
             <div class="user_name user_i">
-                <label>栏目名</label> <input type="text" placeholder="输入栏目名" name="colName">
+                <label>栏目名</label> <input type="text"  placeholder="输入栏目名" name="colName">
             </div>
             <div class="user_password user_i">
                 <label>序<i>调</i>号</label> <input type="text" placeholder="输入序号" name="colId">

@@ -18,9 +18,60 @@ import java.util.List;
  */
 public class ColunmnDaoImpl implements ColunmnDao {
 
+    /**
+     * 校验栏目名是否可用
+     *
+     * @param colName 栏目名
+     * @return  true 栏目名可用  false 栏目名不可用
+     */
+    @Override
+    public boolean CheckColName(String colName) {
+        Connection con = DBUtil.getCon();
+        String sql = "select * from colunmn where colName=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,colName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return true;
+    }
 
     /**
-     *  获取栏目总数
+     * 校验栏目编号是否可用
+     *
+     * @param colId 栏目编号
+     * @return true 栏目名可用  false 栏目名不可用
+     */
+    @Override
+    public boolean CheckColCid(Integer colId) {
+        Connection con = DBUtil.getCon();
+        String sql = "select * from colunmn where colId=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setObject(1,colId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeAll(con,ps);
+        }
+        return true;
+    }
+
+    /**
+     * 获取栏目总数
      *
      * @return
      */
@@ -33,19 +84,19 @@ public class ColunmnDaoImpl implements ColunmnDao {
             String sql = "select count(colId) count from colunmn";
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 return rs.getInt("count");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return 0;
     }
 
     /**
-     *  获取所有栏目编号和名字
+     * 获取所有栏目编号和名字
      *
      * @return
      */
@@ -59,7 +110,7 @@ public class ColunmnDaoImpl implements ColunmnDao {
             String sql = "select * from colunmn";
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Colunmn colunmn = new Colunmn(
                         rs.getInt("colId"),
                         rs.getString("colName")
@@ -69,16 +120,16 @@ public class ColunmnDaoImpl implements ColunmnDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return colunmnList;
     }
 
     /**
-     *  分页查询栏目
+     * 分页查询栏目
      *
-     * @param pageNum   页数
-     * @param pageSize  每页的个数
+     * @param pageNum  页数
+     * @param pageSize 每页的个数
      * @return
      */
     @Override
@@ -92,10 +143,10 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "select * from colunmn limit ?,?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,start);
-            ps.setObject(2,pageSize);
+            ps.setObject(1, start);
+            ps.setObject(2, pageSize);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Colunmn colunmn = new Colunmn(
                         rs.getInt("colId"),
                         rs.getString("colName")
@@ -105,13 +156,13 @@ public class ColunmnDaoImpl implements ColunmnDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return colunmnList;
     }
 
     /**
-     *  根据用户名获取对应的栏目权限
+     * 根据用户名获取对应的栏目权限
      *
      * @param username 用户名
      * @return
@@ -125,9 +176,9 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "select c.colId,c.colName from user_col uc,colunmn c where uc.ColId = c.colId and userName= ?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,username);
+            ps.setObject(1, username);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Colunmn colunmn = new Colunmn(
                         rs.getInt("colId"),
                         rs.getString("colName")
@@ -137,13 +188,13 @@ public class ColunmnDaoImpl implements ColunmnDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return colunmnList;
     }
 
     /**
-     *  添加栏目
+     * 添加栏目
      *
      * @param colId   栏目id
      * @param colName 栏目名称
@@ -157,19 +208,19 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "insert into colunmn (colId,colName) values (?,?)";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,colId);
-            ps.setObject(2,colName);
+            ps.setObject(1, colId);
+            ps.setObject(2, colName);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return count;
     }
 
     /**
-     *  根据栏目id删除栏目
+     * 根据栏目id删除栏目
      *
      * @param colId 栏目id
      * @return
@@ -183,18 +234,18 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "delete from colunmn where colId=?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,colId);
+            ps.setObject(1, colId);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return count;
     }
 
     /**
-     *  根据id修改栏目信息
+     * 根据id修改栏目信息
      *
      * @param colId    原栏目id
      * @param editId   修改的id
@@ -210,20 +261,20 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "update colunmn set colId=?,colName=? where colId=?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,editId);
-            ps.setObject(2,editName);
-            ps.setObject(3,colId);
+            ps.setObject(1, editId);
+            ps.setObject(2, editName);
+            ps.setObject(3, colId);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return count;
     }
 
     /**
-     *  通过栏目名称查询栏目  （模糊查询）
+     * 通过栏目名称查询栏目  （模糊查询）
      *
      * @param colName
      * @return
@@ -237,9 +288,9 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "select * from colunmn where colName like ?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,"%"+colName+"%");
+            ps.setObject(1, "%" + colName + "%");
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Colunmn colunmn = new Colunmn(
                         rs.getInt("colId"),
                         rs.getString("colName")
@@ -249,13 +300,13 @@ public class ColunmnDaoImpl implements ColunmnDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps);
+            DBUtil.closeAll(con, ps);
         }
         return colunmnList;
     }
 
     /**
-     *  根据栏目名称获取id
+     * 根据栏目名称获取id
      *
      * @param colName 栏目名称
      * @return
@@ -270,15 +321,15 @@ public class ColunmnDaoImpl implements ColunmnDao {
             con = DBUtil.getCon();
             String sql = "select * from colunmn where colName=?";
             ps = con.prepareStatement(sql);
-            ps.setObject(1,colName);
+            ps.setObject(1, colName);
             rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 colId = rs.getInt("colId");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            DBUtil.closeAll(con,ps,rs);
+            DBUtil.closeAll(con, ps, rs);
         }
         return colId;
     }
