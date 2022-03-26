@@ -7,7 +7,7 @@
 - 栏目表以栏目id为主键
 - 新闻表以新闻编号为主键（新闻编号发布新闻时随机生成不重复的编号）
 - 账户、栏目中间表  账户与栏目建立联系，可方便对账户和栏目的管理
-![图片](https://user-images.githubusercontent.com/88310286/160232018-d79adaf0-59a4-402e-bb46-140c40735dde.png)
+![图片](https://user-images.githubusercontent.com/88310286/160232426-d07c52fe-256b-4942-83af-fd5dbc642cd2.png)
 - 新闻、栏目中间表  方便账户对新闻的管理，让账户、栏目和新闻之间建立联系
 ![图片](https://user-images.githubusercontent.com/88310286/160232358-12befbea-c4bb-432e-bfd2-863e0d0d54e2.png)
 
