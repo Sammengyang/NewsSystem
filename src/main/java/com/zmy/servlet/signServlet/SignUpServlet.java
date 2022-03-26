@@ -71,6 +71,7 @@ public class SignUpServlet extends HttpServlet {
                     request.getSession().setAttribute("fileName", fileName);
                     System.out.println("fileName = " + fileName);
                     response.sendRedirect("../../view/index.jsp");
+//                    request.getRequestDispatcher("../../view/index.jsp").forward(request,response);
                 } else {
                     response.sendRedirect("../../view/Sign_up.jsp");
                 }
