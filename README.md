@@ -3,7 +3,6 @@
 # 数据库建表
 
 ![图片](https://user-images.githubusercontent.com/88310286/160231908-c5deabaf-439e-488c-ae5a-07f62e6a63f9.png)
-
 - 账户表以用户名为主键
 - 栏目表以栏目id为主键
 - 新闻表以新闻编号为主键（新闻编号发布新闻时随机生成不重复的编号）
